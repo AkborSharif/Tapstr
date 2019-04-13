@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyHeight = "10dp"
+    android:keyWidth="1dp"
+    android:horizontalGap="100dp"
+    android:verticalGap="100dp"
+>
+    <Row>
+        <Key android:codes="49" android:keyLabel="" android:keyEdgeFlags="left"/>
+        <Key android:codes="50" android:keyLabel=""/>
+        <Key android:codes="51" android:keyLabel=""/>
+        <Key android:codes="52" android:keyLabel=""/>
+        <Key android:codes="53" android:keyLabel=""/>
+        <Key android:codes="-5" android:keyLabel="" android:keyWidth="20%p" android:isRepeatable="true" android:keyEdgeFlags="right"/>
+    </Row>
+    <Row>
+        <Key android:codes="49" android:keyLabel="" android:keyEdgeFlags="left"/>
+        <Key android:codes="50" android:keyLabel=""/>
+        <Key android:codes="51" android:keyLabel=""/>
+        <Key android:codes="52" android:keyLabel=""/>
+        <Key android:codes="53" android:keyLabel=""/>
+        <Key android:codes="-5" android:keyLabel="" android:keyWidth="20%p" android:isRepeatable="true" android:keyEdgeFlags="right"/>
+    </Row>
+
+
+
+</Keyboard>
