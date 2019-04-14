@@ -8,17 +8,59 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="200dp"
         android:orientation="horizontal"
-        android:weightSum="50"
-        >
+       >
+
 
         <com.akbor.studyproj.CustomView
-            android:layout_width="match_parent"
             android:id="@+id/rightarea"
-            android:layout_height="100dp" android:layout_weight="50"
-            android:background="@color/colorPrimary">
-        </com.akbor.studyproj.CustomView>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="15"
+            android:background="@color/colorPrimary"></com.akbor.studyproj.CustomView>
+
+        <com.akbor.studyproj.CustomView
+            android:id="@+id/centerarea"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="15"
+            android:background="@color/blue"></com.akbor.studyproj.CustomView>
+
+
+        <com.akbor.studyproj.CustomView
+            android:id="@+id/leftrarea"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="15"
+            android:background="@color/colorPrimaryDark"></com.akbor.studyproj.CustomView>
+
+        <LinearLayout
+            android:id="@+id/what"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="19"
+            android:orientation="vertical"
+            >
+            <com.akbor.studyproj.CustomView
+                android:id="@+id/a1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:background="@color/blue"></com.akbor.studyproj.CustomView>
+            <com.akbor.studyproj.CustomView
+                android:id="@+id/a2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:background="@color/colorAccent"></com.akbor.studyproj.CustomView>
+            <com.akbor.studyproj.CustomView
+                android:id="@+id/a3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:background="@color/colorPrimaryDark"></com.akbor.studyproj.CustomView>
+        </LinearLayout>
 
     </LinearLayout>
 </RelativeLayout>

@@ -11,6 +11,10 @@ import android.view.inputmethod.InputConnection;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import static com.akbor.studyproj.R.xml.key_layout;
 
 public class MyinputService extends InputMethodService implements KeyboardView.OnKeyboardActionListener {
@@ -20,8 +24,21 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
     @Override
     public View onCreateInputView() {
         keyboardView = getLayoutInflater().inflate(R.layout.keyboard_view, null);
+
         CustomView rightarea = keyboardView.findViewById(R.id.rightarea);
         rightarea.setInputConnection(this::getCurrentInputConnection);
+        //collect converts the stream back to the list
+        rightarea.setCharacters(Stream.of("s", "d", "e", "w", "q", "a", "z", "x", "c").collect(Collectors.toList()));
+
+        CustomView centerarea = keyboardView.findViewById(R.id.centerarea);
+        centerarea.setInputConnection(this::getCurrentInputConnection);
+        centerarea.setCharacters(Stream.of("g", "h", "y", "t", "r", "f", " ", "v", "u").collect(Collectors.toList()));
+
+
+        CustomView leftarea = keyboardView.findViewById(R.id.leftrarea);
+        leftarea.setInputConnection(this::getCurrentInputConnection);
+        leftarea.setCharacters(Stream.of("k", "l", "p", "o", "i", "j", "b", "n", "m").collect(Collectors.toList()));
+
         return keyboardView;
     }
 
