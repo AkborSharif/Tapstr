@@ -27,7 +27,7 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
 
         CustomView rightarea = keyboardView.findViewById(R.id.rightarea);
         rightarea.setInputConnection(this::getCurrentInputConnection);
-        //collect converts the stream back to the list
+        //"collect" converts the stream back to the list
         rightarea.setCharacters(Stream.of("s", "d", "e", "w", "q", "a", "z", "x", "c").collect(Collectors.toList()));
 
         CustomView centerarea = keyboardView.findViewById(R.id.centerarea);

@@ -78,6 +78,8 @@ public class CustomView extends LinearLayout {
             double theta = (Math.toDegrees(Math.atan2(dx, dy)) - 45 + 360) % 360;
 
             if (distance < threshold * threshold ) {
+                // ic.get() will call getCurrentInputConnection from MyinputService and
+                // committext will set text on textfield.
                 ic.get().commitText(characters.get(0), 1);
             } else {
                 if (theta<67.5 && theta>22.5){
@@ -104,8 +106,8 @@ public class CustomView extends LinearLayout {
                     ic.get().commitText(characters.get(8), 1);
                 }
             }
-        }
-        // ic.get() will call getCurrentInputConnection from MyinputService and committext will set text on textfield.
+        } 
+
         return true;
     }
 
