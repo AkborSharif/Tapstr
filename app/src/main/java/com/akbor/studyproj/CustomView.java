@@ -106,6 +106,7 @@ public class CustomView extends LinearLayout {
                     ic.get().commitText(characters.get(8), 1);
                 }
             }
+            performClick();
         } 
 
         return true;

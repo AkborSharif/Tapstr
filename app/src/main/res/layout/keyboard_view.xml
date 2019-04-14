@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="15"
-            android:background="@color/blue">
+            android:background="@color/red">
         </com.akbor.studyproj.CustomView>
 
         <com.akbor.studyproj.CustomView
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="15"
-            android:background="@color/colorPrimaryDark">
+            android:background="@color/blue">
         </com.akbor.studyproj.CustomView>
 
         <LinearLayout
@@ -47,7 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="15"
-                android:background="@color/blue">
+                android:background="@color/purple">
             </com.akbor.studyproj.CustomView>
 
             <com.akbor.studyproj.CustomView
@@ -55,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="15"
-                android:background="@color/colorAccent">
+                android:background="@color/green">
             </com.akbor.studyproj.CustomView>
 
             <com.akbor.studyproj.CustomView
@@ -63,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="15"
-                android:background="@color/colorPrimaryDark">
+                android:background="@color/colorPrimary">
             </com.akbor.studyproj.CustomView>
         </LinearLayout>
 
