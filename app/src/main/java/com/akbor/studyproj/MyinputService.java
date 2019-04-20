@@ -5,12 +5,12 @@ import android.hardware.camera2.params.InputConfiguration;
 import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputConnection;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -39,8 +39,27 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         leftarea.setInputConnection(this::getCurrentInputConnection);
         leftarea.setCharacters(Stream.of("k", "l", "p", "o", "i", "j", "b", "n", "m").collect(Collectors.toList()));
 
+
+        CustomFunc backspace  = keyboardView.findViewById(R.id.a2);
+        backspace.setInputConnection(this::getCurrentInputConnection);
+        backspace.setAction(ic -> ic.deleteSurroundingText(1,0));
+
+        CustomCapsLock capsLock = keyboardView.findViewById(R.id.a3);
+        capsLock.setInputConnection(this::getCurrentInputConnection);
+        Runnable toggleCapsLock = () -> {
+            capsLock.setUpperCaseMode(!capsLock.isUpperCaseMode());
+            rightarea.setUpperCase(capsLock.isUpperCaseMode());
+            centerarea.setUpperCase(capsLock.isUpperCaseMode());
+            leftarea.setUpperCase(capsLock.isUpperCaseMode());
+        };
+        capsLock.setToggleCapsLock(toggleCapsLock);
+//        if (CapsLock.performClick()) {
+//                rightarea.setCharacters(Stream.of("s", "d", "e", "w", "q", "a", "z", "x", "c").collect(Collectors.toList()));
+//
+//        }
         return keyboardView;
     }
+
 
     @Override
     public void onPress(int primaryCode) {

@@ -11,6 +11,8 @@ import android.view.inputmethod.InputConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
+
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -19,7 +21,7 @@ public class CustomView extends LinearLayout {
     /**
      * supplier is a callback function to get the inputconnection from the {@link MyinputService}
      */
-    private Supplier<InputConnection> ic;
+    protected Supplier<InputConnection> ic;
 
     /**
      * x coordinate of down position (click)
@@ -30,6 +32,11 @@ public class CustomView extends LinearLayout {
      * y coordinate of down position (click)
      */
     float y;
+
+    /**
+     * An boolean indicating if this keyboard is in upper case mode.
+     */
+    boolean upperCase = false;
 
     /**
      * The list of characters corresponding to this keyboard section
@@ -51,6 +58,21 @@ public class CustomView extends LinearLayout {
 
     public void setInputConnection(Supplier<InputConnection> getIC) {
         ic = getIC;
+    }
+
+    public void setUpperCase(boolean isUpper) {
+        if (upperCase != isUpper) {
+            if (isUpper) {
+                characters = characters.stream()
+                        .map(String::toUpperCase)
+                        .collect(Collectors.toList());
+            } else {
+                characters = characters.stream()
+                        .map(String::toLowerCase)
+                        .collect(Collectors.toList());
+            }
+            upperCase = isUpper;
+        }
     }
 
     public void setCharacters(List<String> characters) {
@@ -104,11 +126,11 @@ public class CustomView extends LinearLayout {
                 }
                 else {
                     ic.get().commitText(characters.get(8), 1);
+                    
                 }
             }
             performClick();
-        } 
-
+        }
         return true;
     }
 

@@ -25,6 +25,7 @@
             android:layout_height="match_parent"
             android:layout_weight="15"
             android:background="@color/red">
+
         </com.akbor.studyproj.CustomView>
 
         <com.akbor.studyproj.CustomView
@@ -50,21 +51,21 @@
                 android:background="@color/purple">
             </com.akbor.studyproj.CustomView>
 
-            <com.akbor.studyproj.CustomView
+            <com.akbor.studyproj.CustomFunc
                 android:id="@+id/a2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="15"
                 android:background="@color/green">
-            </com.akbor.studyproj.CustomView>
+            </com.akbor.studyproj.CustomFunc>
 
-            <com.akbor.studyproj.CustomView
+            <com.akbor.studyproj.CustomCapsLock
                 android:id="@+id/a3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="15"
                 android:background="@color/colorPrimary">
-            </com.akbor.studyproj.CustomView>
+            </com.akbor.studyproj.CustomCapsLock>
         </LinearLayout>
 
     </LinearLayout>
