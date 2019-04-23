@@ -43,7 +43,6 @@ public class CustomCapsLock extends CustomFunc {
     @Override
     public boolean onTouchEvent(MotionEvent e) {
         if (e.getAction()== MotionEvent.ACTION_UP) {
-//            action.accept(ic.get());
 
             toggleCapsLock.run();
         }

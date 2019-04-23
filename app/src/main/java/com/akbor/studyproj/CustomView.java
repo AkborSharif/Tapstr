@@ -34,7 +34,7 @@ public class CustomView extends LinearLayout {
     float y;
 
     /**
-     * An boolean indicating if this keyboard is in upper case mode.
+     * A boolean indicating if this keyboard is in upper case mode.
      */
     boolean upperCase = false;
 
