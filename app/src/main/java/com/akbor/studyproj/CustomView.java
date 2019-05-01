@@ -1,5 +1,6 @@
 package com.akbor.studyproj;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.inputmethodservice.InputMethodService;
@@ -10,6 +11,8 @@ import android.view.inputmethod.InputConnection;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -24,6 +27,11 @@ public class CustomView extends LinearLayout {
     protected Supplier<InputConnection> ic;
 
     /**
+     * A special function for the layer change
+     */
+    private Runnable no6function = null;
+    private Runnable uppercaseBackgroundFunc = null;
+    /**
      * x coordinate of down position (click)
      */
     float x;
@@ -37,6 +45,11 @@ public class CustomView extends LinearLayout {
      * A boolean indicating if this keyboard is in upper case mode.
      */
     boolean upperCase = false;
+
+    /**
+     *
+     */
+    private Timer timer;
 
     /**
      * The list of characters corresponding to this keyboard section
@@ -74,7 +87,6 @@ public class CustomView extends LinearLayout {
             upperCase = isUpper;
         }
     }
-
     public void setCharacters(List<String> characters) {
         this.characters = characters;
     }
@@ -85,15 +97,27 @@ public class CustomView extends LinearLayout {
         if (event.getAction()== MotionEvent.ACTION_DOWN) {
             x = event.getX();
             y = event.getY();
+            timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    setUpperCase(true);
+//                    ((Activity) getContext()).runOnUiThread(() -> {
+//                        uppercaseBackgroundFunc.run();
+//                    });
+                }
+            }, 1000);
+
         }
 
         if (event.getAction() == MotionEvent.ACTION_UP) {
+            timer.cancel();
             float x2 = event.getX();
             float y2 = event.getY();
             float dx = (x2-x);
             float dy = (y2-y);
 
-            float distance = dx*dx + dy*dy;
+            float distance = dx*dx + dy*dy;  //d = root(x^2+y^2)
             double threshold = getWidth() * 0.2;
             // Added 360 to get rid of negative angles and
             // the -45 is an offset to match the actual keyboard
@@ -104,37 +128,46 @@ public class CustomView extends LinearLayout {
                 // committext will set text on textfield.
                 ic.get().commitText(characters.get(0), 1);
             } else {
-                if (theta<67.5 && theta>22.5){
+                if (theta < 22.5) {
+                    ic.get().commitText(characters.get(8), 1);
+                } else if (theta<67.5){
                     ic.get().commitText(characters.get(1), 1);
-                } else if (theta<112.5 && theta>67.5){
+                } else if (theta<112.5){
                     ic.get().commitText(characters.get(2), 1);
                 }
-                else if (theta<157.5 && theta>112.5){
+                else if (theta<157.5 ){
                     ic.get().commitText(characters.get(3), 1);
                 }
-                else if (theta<202.5 && theta>157.5){
+                else if (theta<202.5){
                     ic.get().commitText(characters.get(4), 1);
                 }
-                else if (theta<247.5 && theta>202.5){
+                else if (theta<247.5){
                     ic.get().commitText(characters.get(5), 1);
                 }
-                else if (theta<292.5 && theta>247.5){
-                    ic.get().commitText(characters.get(6), 1);
+                else if (theta<292.5 ){
+                    if (no6function == null) {
+                        ic.get().commitText(characters.get(6), 1);
+                    } else {
+                        no6function.run();
+                    }
                 }
-                else if (theta<337.5 && theta>292.5){
+                else if (theta<337.5){
                     ic.get().commitText(characters.get(7), 1);
-                }
-                else {
-                    ic.get().commitText(characters.get(8), 1);
-                    
                 }
             }
             performClick();
+            setUpperCase(false);
         }
         return true;
     }
 
+    public void setNo6function(Runnable no6function) {
+        this.no6function = no6function;
+    }
 
+    public void setUppercaseBackgroundFunc(Runnable uppercaseBackgroundFunc) {
+        this.uppercaseBackgroundFunc = uppercaseBackgroundFunc;
+    }
 
     @Override
     public boolean performClick() {

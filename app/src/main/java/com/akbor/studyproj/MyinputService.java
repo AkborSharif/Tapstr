@@ -20,43 +20,74 @@ import static com.akbor.studyproj.R.xml.key_layout;
 public class MyinputService extends InputMethodService implements KeyboardView.OnKeyboardActionListener {
 
     private View keyboardView;
-
+    boolean check = true;
     @Override
     public View onCreateInputView() {
         keyboardView = getLayoutInflater().inflate(R.layout.keyboard_view, null);
 
-        CustomView rightarea = keyboardView.findViewById(R.id.rightarea);
-        rightarea.setInputConnection(this::getCurrentInputConnection);
+        CustomView leftarea = keyboardView.findViewById(R.id.leftarea);
+        leftarea.setInputConnection(this::getCurrentInputConnection);
         //"collect" converts the stream back to the list
-        rightarea.setCharacters(Stream.of("s", "d", "e", "w", "q", "a", "z", "x", "c").collect(Collectors.toList()));
+        leftarea.setCharacters(Stream.of("s", "d", "e", "w", "q", "a", " ", "z", "x").collect(Collectors.toList()));
+
 
         CustomView centerarea = keyboardView.findViewById(R.id.centerarea);
         centerarea.setInputConnection(this::getCurrentInputConnection);
-        centerarea.setCharacters(Stream.of("g", "h", "y", "t", "r", "f", " ", "v", "u").collect(Collectors.toList()));
+        centerarea.setCharacters(Stream.of("g", "h", "y", "t", "r", "f", "c", "v", "b").collect(Collectors.toList()));
 
 
-        CustomView leftarea = keyboardView.findViewById(R.id.leftrarea);
-        leftarea.setInputConnection(this::getCurrentInputConnection);
-        leftarea.setCharacters(Stream.of("k", "l", "p", "o", "i", "j", "b", "n", "m").collect(Collectors.toList()));
+        CustomView rightarea = keyboardView.findViewById(R.id.rightarea);
+        rightarea.setInputConnection(this::getCurrentInputConnection);
+        rightarea.setCharacters(Stream.of("k", "l", "o", "i", "u", "j", "n", "m", "p").collect(Collectors.toList()));
 
 
         CustomFunc backspace  = keyboardView.findViewById(R.id.a2);
         backspace.setInputConnection(this::getCurrentInputConnection);
         backspace.setAction(ic -> ic.deleteSurroundingText(1,0));
 
-        CustomCapsLock capsLock = keyboardView.findViewById(R.id.a3);
+        CustomFunc a3 = keyboardView.findViewById(R.id.a3);
+        a3.setInputConnection(this::getCurrentInputConnection);
+        a3.setAction(ic -> ic.commitText(" ", 1));
+
+        CustomCapsLock capsLock = keyboardView.findViewById(R.id.a1);
         capsLock.setInputConnection(this::getCurrentInputConnection);
         Runnable toggleCapsLock = () -> {
             capsLock.setUpperCaseMode(!capsLock.isUpperCaseMode());
-            rightarea.setUpperCase(capsLock.isUpperCaseMode());
-            centerarea.setUpperCase(capsLock.isUpperCaseMode());
             leftarea.setUpperCase(capsLock.isUpperCaseMode());
+            centerarea.setUpperCase(capsLock.isUpperCaseMode());
+            rightarea.setUpperCase(capsLock.isUpperCaseMode());
         };
-        capsLock.setToggleCapsLock(toggleCapsLock);
-//        if (CapsLock.performClick()) {
-//                rightarea.setCharacters(Stream.of("s", "d", "e", "w", "q", "a", "z", "x", "c").collect(Collectors.toList()));
 //
-//        }
+//        Runnable backgroundupper = () -> {
+//            leftarea.setBackground(getDrawable(R.drawable.left));
+//            centerarea.setBackground(getDrawable(R.drawable.middle));
+//            rightarea.setBackground(getDrawable(R.drawable.right));
+//        };
+
+//        leftarea.setUppercaseBackgroundFunc(backgroundupper);
+//        centerarea.setUppercaseBackgroundFunc(backgroundupper);
+//        rightarea.setUppercaseBackgroundFunc(backgroundupper);
+
+        leftarea.setNo6function(() -> {
+            if (!check){
+                leftarea.setBackground(getDrawable(R.drawable.first));
+                centerarea.setBackground(getDrawable(R.drawable.second));
+                rightarea.setBackground(getDrawable(R.drawable.third));
+                check = true;
+            }
+            else {
+                leftarea.setBackgroundColor(Color.BLUE);
+                centerarea.setBackgroundColor(Color.YELLOW);
+                rightarea.setBackgroundColor(Color.RED);
+                check = false;
+            }
+        });
+
+
+        capsLock.setToggleCapsLock(toggleCapsLock);
+
+
+
         return keyboardView;
     }
 

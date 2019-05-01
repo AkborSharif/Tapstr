@@ -8,15 +8,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         android:orientation="horizontal">
 
         <com.akbor.studyproj.CustomView
-            android:id="@+id/rightarea"
+            android:id="@+id/leftarea"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="15"
-            android:background="@color/colorPrimary">
+            android:background="@drawable/first">
         </com.akbor.studyproj.CustomView>
 
         <com.akbor.studyproj.CustomView
@@ -24,16 +24,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="15"
-            android:background="@color/red">
+            android:background="@drawable/second">
 
         </com.akbor.studyproj.CustomView>
 
         <com.akbor.studyproj.CustomView
-            android:id="@+id/leftrarea"
+            android:id="@+id/rightarea"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="15"
-            android:background="@color/blue">
+            android:background="@drawable/third">
         </com.akbor.studyproj.CustomView>
 
         <LinearLayout
@@ -43,29 +43,29 @@
             android:layout_weight="19"
             android:orientation="vertical"
             >
-            <com.akbor.studyproj.CustomView
+            <com.akbor.studyproj.CustomCapsLock
                 android:id="@+id/a1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="15"
-                android:background="@color/purple">
-            </com.akbor.studyproj.CustomView>
+                android:background="@drawable/a1">
+            </com.akbor.studyproj.CustomCapsLock>
 
             <com.akbor.studyproj.CustomFunc
                 android:id="@+id/a2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="15"
-                android:background="@color/green">
+                android:background="@drawable/a2">
             </com.akbor.studyproj.CustomFunc>
 
-            <com.akbor.studyproj.CustomCapsLock
+            <com.akbor.studyproj.CustomFunc
                 android:id="@+id/a3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="15"
-                android:background="@color/colorPrimary">
-            </com.akbor.studyproj.CustomCapsLock>
+                android:background="@drawable/a3">
+            </com.akbor.studyproj.CustomFunc>
         </LinearLayout>
 
     </LinearLayout>

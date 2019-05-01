@@ -15,12 +15,12 @@ public class CustomFunc extends CustomView {
 
     Consumer<InputConnection> action;
 
-    public CustomFunc(Context context) {
-        super(context);
-    }
-
     public void setAction(Consumer<InputConnection> action) {
         this.action = action;
+    }
+
+    public CustomFunc(Context context) {
+        super(context);
     }
 
     public CustomFunc(Context context, AttributeSet attrs) {
@@ -37,15 +37,7 @@ public class CustomFunc extends CustomView {
         if (event.getAction()== MotionEvent.ACTION_UP)
         {
             action.accept(ic.get());
-
         }
-
-//        if (event.getAction()== MotionEvent.ACTION_DOWN)
-//        {
-//            //action.accept(ic.C);
-//
-//        }
-
 
         return true;
     }
