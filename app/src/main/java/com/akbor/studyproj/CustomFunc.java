@@ -2,14 +2,10 @@ package com.akbor.studyproj;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.inputmethod.InputConnection;
-import android.widget.LinearLayout;
 
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class CustomFunc extends CustomView {
 
@@ -19,8 +15,13 @@ public class CustomFunc extends CustomView {
         this.action = action;
     }
 
-    public CustomFunc(Context context) {
-        super(context);
+//    public CustomFunc(Context context) {
+//        super(context, attrs, defStyleAttr, defStyleRes);
+//    }
+
+    public CustomFunc(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, Consumer<InputConnection> action) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        this.action = action;
     }
 
     public CustomFunc(Context context, AttributeSet attrs) {

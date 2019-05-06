@@ -1,15 +1,12 @@
 package com.akbor.studyproj;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
-import android.inputmethodservice.InputMethodService;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.inputmethod.InputConnection;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -17,7 +14,6 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 public class CustomView extends LinearLayout {
 
@@ -26,20 +22,42 @@ public class CustomView extends LinearLayout {
      */
     protected Supplier<InputConnection> ic;
 
+
+
+    private String type;
     /**
      * A special function for the layer change
      */
     private Runnable no6function = null;
-    private Runnable uppercaseBackgroundFunc = null;
+
+
+    protected Runnable uppercaseBackgroundFunc = null;
+    protected Runnable lowercaseBackgroundFunc = null;
+
+
+
     /**
      * x coordinate of down position (click)
      */
     float x;
 
     /**
+     * x coordinate of up position (click)
+     */
+    float x2;
+
+    /**
+     * y coordinate of down position (click)
+     */
+    float y2;
+    /**
      * y coordinate of down position (click)
      */
     float y;
+
+
+    float dx;
+    float dy;
 
     /**
      * A boolean indicating if this keyboard is in upper case mode.
@@ -56,18 +74,16 @@ public class CustomView extends LinearLayout {
      */
     List<String> characters;
 
-    public CustomView(Context context) {
+
+    public CustomView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context);
     }
-
 
     public CustomView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public CustomView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
+    public CustomView(Context context, AttributeSet attrs, int defStyleAttr) { super(context, attrs, defStyleAttr); }
 
     public void setInputConnection(Supplier<InputConnection> getIC) {
         ic = getIC;
@@ -87,9 +103,7 @@ public class CustomView extends LinearLayout {
             upperCase = isUpper;
         }
     }
-    public void setCharacters(List<String> characters) {
-        this.characters = characters;
-    }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -97,26 +111,35 @@ public class CustomView extends LinearLayout {
         if (event.getAction()== MotionEvent.ACTION_DOWN) {
             x = event.getX();
             y = event.getY();
-            timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    setUpperCase(true);
-//                    ((Activity) getContext()).runOnUiThread(() -> {
-//                        uppercaseBackgroundFunc.run();
-//                    });
-                }
-            }, 1000);
 
+
+            if (!type.equals("numeric")) {
+
+                timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        setUpperCase(true);
+                        new Handler(Looper.getMainLooper()).post(uppercaseBackgroundFunc);
+                    }
+                }, 500);
+
+            }
         }
 
         if (event.getAction() == MotionEvent.ACTION_UP) {
-            timer.cancel();
-            float x2 = event.getX();
-            float y2 = event.getY();
-            float dx = (x2-x);
-            float dy = (y2-y);
 
+        if (!type.equals("numeric")) {
+            timer.cancel();
+        }
+             x2 = event.getX();
+             y2 = event.getY();
+             dx = (x2-x);
+             dy = (y2-y);
+
+            if (type.equals("upper")) {
+                lowercaseBackgroundFunc.run();
+            }
             float distance = dx*dx + dy*dy;  //d = root(x^2+y^2)
             double threshold = getWidth() * 0.2;
             // Added 360 to get rid of negative angles and
@@ -161,12 +184,24 @@ public class CustomView extends LinearLayout {
         return true;
     }
 
+    public void setCharacters(List<String> characters) {
+        this.characters = characters;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public void setNo6function(Runnable no6function) {
         this.no6function = no6function;
     }
 
     public void setUppercaseBackgroundFunc(Runnable uppercaseBackgroundFunc) {
         this.uppercaseBackgroundFunc = uppercaseBackgroundFunc;
+    }
+
+    public void setLowercaseBackgroundFunc(Runnable lowercaseBackgroundFunc) {
+        this.lowercaseBackgroundFunc = lowercaseBackgroundFunc;
     }
 
     @Override

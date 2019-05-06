@@ -36,20 +36,20 @@
             android:background="@drawable/third">
         </com.akbor.studyproj.CustomView>
 
-        <LinearLayout
+        <com.akbor.studyproj.Capslock
             android:id="@+id/minipart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="19"
             android:orientation="vertical"
             >
-            <com.akbor.studyproj.CustomCapsLock
+            <com.akbor.studyproj.CustomFunc
                 android:id="@+id/a1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="15"
                 android:background="@drawable/a1">
-            </com.akbor.studyproj.CustomCapsLock>
+            </com.akbor.studyproj.CustomFunc>
 
             <com.akbor.studyproj.CustomFunc
                 android:id="@+id/a2"
@@ -66,7 +66,7 @@
                 android:layout_weight="15"
                 android:background="@drawable/a3">
             </com.akbor.studyproj.CustomFunc>
-        </LinearLayout>
+        </com.akbor.studyproj.Capslock>
 
     </LinearLayout>
 </RelativeLayout>

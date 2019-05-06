@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+
 import static com.akbor.studyproj.R.xml.key_layout;
 
 public class MyinputService extends InputMethodService implements KeyboardView.OnKeyboardActionListener {
@@ -40,53 +41,89 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         rightarea.setInputConnection(this::getCurrentInputConnection);
         rightarea.setCharacters(Stream.of("k", "l", "o", "i", "u", "j", "n", "m", "p").collect(Collectors.toList()));
 
+        leftarea.setType("lower");
+        centerarea.setType("lower");
+        rightarea.setType("lower");
 
-        CustomFunc backspace  = keyboardView.findViewById(R.id.a2);
-        backspace.setInputConnection(this::getCurrentInputConnection);
-        backspace.setAction(ic -> ic.deleteSurroundingText(1,0));
-
-        CustomFunc a3 = keyboardView.findViewById(R.id.a3);
-        a3.setInputConnection(this::getCurrentInputConnection);
-        a3.setAction(ic -> ic.commitText(" ", 1));
-
-        CustomCapsLock capsLock = keyboardView.findViewById(R.id.a1);
-        capsLock.setInputConnection(this::getCurrentInputConnection);
+        Capslock capsLock = keyboardView.findViewById(R.id.minipart);
+        // capsLock.setInputConnection(this::getCurrentInputConnection);
         Runnable toggleCapsLock = () -> {
             capsLock.setUpperCaseMode(!capsLock.isUpperCaseMode());
             leftarea.setUpperCase(capsLock.isUpperCaseMode());
             centerarea.setUpperCase(capsLock.isUpperCaseMode());
             rightarea.setUpperCase(capsLock.isUpperCaseMode());
         };
-//
-//        Runnable backgroundupper = () -> {
-//            leftarea.setBackground(getDrawable(R.drawable.left));
-//            centerarea.setBackground(getDrawable(R.drawable.middle));
-//            rightarea.setBackground(getDrawable(R.drawable.right));
-//        };
 
-//        leftarea.setUppercaseBackgroundFunc(backgroundupper);
-//        centerarea.setUppercaseBackgroundFunc(backgroundupper);
-//        rightarea.setUppercaseBackgroundFunc(backgroundupper);
+        CustomFunc newline  = keyboardView.findViewById(R.id.a1);
+        newline.setInputConnection(this::getCurrentInputConnection);
+        newline.setAction(ic -> ic.commitText("\n", 0));
 
+        CustomFunc backspace  = keyboardView.findViewById(R.id.a2);
+        backspace.setInputConnection(this::getCurrentInputConnection);
+        backspace.setAction(ic -> ic.deleteSurroundingText(1,0));
+
+        CustomFunc space = keyboardView.findViewById(R.id.a3);
+        space.setInputConnection(this::getCurrentInputConnection);
+        space.setAction(ic -> ic.commitText(" ", 1));
+
+
+        capsLock.setToggleCapsLock(toggleCapsLock);
+
+        Runnable backgroundupper = () -> {
+            leftarea.setBackground(getDrawable(R.drawable.upl));
+            centerarea.setBackground(getDrawable(R.drawable.upm));
+            rightarea.setBackground(getDrawable(R.drawable.upr));
+            leftarea.setType("upper");
+            centerarea.setType("upper");
+            rightarea.setType("upper");
+        };
+
+        Runnable backgroundlower = () -> {
+            leftarea.setBackground(getDrawable(R.drawable.first));
+            centerarea.setBackground(getDrawable(R.drawable.second));
+            rightarea.setBackground(getDrawable(R.drawable.third));
+            leftarea.setType("lower");
+            centerarea.setType("lower");
+            rightarea.setType("lower");
+        };
+
+        leftarea.setLowercaseBackgroundFunc(backgroundlower);
+        centerarea.setLowercaseBackgroundFunc(backgroundlower);
+        rightarea.setLowercaseBackgroundFunc(backgroundlower);
+
+        leftarea.setUppercaseBackgroundFunc(backgroundupper);
+        centerarea.setUppercaseBackgroundFunc(backgroundupper);
+        rightarea.setUppercaseBackgroundFunc(backgroundupper);
+
+        //when "check" is true programe will change the layers to nubers and special characters
         leftarea.setNo6function(() -> {
             if (!check){
                 leftarea.setBackground(getDrawable(R.drawable.first));
                 centerarea.setBackground(getDrawable(R.drawable.second));
                 rightarea.setBackground(getDrawable(R.drawable.third));
+
+                leftarea.setCharacters(Stream.of("s", "d", "e", "w", "q", "a", " ", "z", "x").collect(Collectors.toList()));
+                centerarea.setCharacters(Stream.of("g", "h", "y", "t", "r", "f", "c", "v", "b").collect(Collectors.toList()));
+                rightarea.setCharacters(Stream.of("k", "l", "o", "i", "u", "j", "n", "m", "p").collect(Collectors.toList()));
+                leftarea.setType("lower");
+                centerarea.setType("lower");
+                rightarea.setType("lower");
                 check = true;
             }
             else {
-                leftarea.setBackgroundColor(Color.BLUE);
-                centerarea.setBackgroundColor(Color.YELLOW);
-                rightarea.setBackgroundColor(Color.RED);
+                leftarea.setBackground(getDrawable(R.drawable.lgc));
+                centerarea.setBackground(getDrawable(R.drawable.number));
+                rightarea.setBackground(getDrawable(R.drawable.sign));
+
+                leftarea.setCharacters(Stream.of(".", "\"", ";", ",", ":", "'", " ", "!", "?").collect(Collectors.toList()));
+                centerarea.setCharacters(Stream.of("5", "6", "3", "2", "1", "4", "7", "8", "9").collect(Collectors.toList()));
+                rightarea.setCharacters(Stream.of("0", "&", "-", "@", "+", "$", "*", "#", "/").collect(Collectors.toList()));
+                leftarea.setType("numeric");
+                centerarea.setType("numeric");
+                rightarea.setType("numeric");
                 check = false;
             }
         });
-
-
-        capsLock.setToggleCapsLock(toggleCapsLock);
-
-
 
         return keyboardView;
     }
