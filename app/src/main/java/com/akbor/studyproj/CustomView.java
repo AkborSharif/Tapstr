@@ -4,10 +4,13 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
+import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.inputmethod.InputConnection;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.function.Supplier;
@@ -29,12 +32,13 @@ public class CustomView extends LinearLayout {
      * A special function for the layer change
      */
     private Runnable no6function = null;
-
-
     protected Runnable uppercaseBackgroundFunc = null;
     protected Runnable lowercaseBackgroundFunc = null;
+    protected Runnable numr = null;
+    protected Runnable spceialchar = null;
+    protected Runnable specialcharbackground = null;
 
-
+    protected Runnable longpressdel = null;
 
     /**
      * x coordinate of down position (click)
@@ -50,6 +54,7 @@ public class CustomView extends LinearLayout {
      * y coordinate of down position (click)
      */
     float y2;
+
     /**
      * y coordinate of down position (click)
      */
@@ -57,6 +62,7 @@ public class CustomView extends LinearLayout {
 
 
     float dx;
+
     float dy;
 
     /**
@@ -73,8 +79,6 @@ public class CustomView extends LinearLayout {
      * The list of characters corresponding to this keyboard section
      */
     List<String> characters;
-
-
     public CustomView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context);
     }
@@ -87,6 +91,10 @@ public class CustomView extends LinearLayout {
 
     public void setInputConnection(Supplier<InputConnection> getIC) {
         ic = getIC;
+    }
+
+    public void setNumer(Runnable numer) {
+        this.numr = numer;
     }
 
     public void setUpperCase(boolean isUpper) {
@@ -104,7 +112,6 @@ public class CustomView extends LinearLayout {
         }
     }
 
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         super.onTouchEvent(event);
@@ -112,26 +119,31 @@ public class CustomView extends LinearLayout {
             x = event.getX();
             y = event.getY();
 
-
-            if (!type.equals("numeric")) {
-
                 timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        setUpperCase(true);
-                        new Handler(Looper.getMainLooper()).post(uppercaseBackgroundFunc);
+
+                        if (type.equals("lower")) {
+                            setUpperCase(true);
+                            new Handler(Looper.getMainLooper()).post(uppercaseBackgroundFunc);
+                        }
+                    else if (type.equals("numeric")){
+                            new Handler(Looper.getMainLooper()).post(specialcharbackground);
+
+                        }
+
                     }
                 }, 500);
-
-            }
         }
+
+
 
         if (event.getAction() == MotionEvent.ACTION_UP) {
 
-        if (!type.equals("numeric")) {
+        //if (!type.equals("numeric")) {
             timer.cancel();
-        }
+        //}
              x2 = event.getX();
              y2 = event.getY();
              dx = (x2-x);
@@ -140,6 +152,15 @@ public class CustomView extends LinearLayout {
             if (type.equals("upper")) {
                 lowercaseBackgroundFunc.run();
             }
+
+            if (type.equals("spec")) {
+                spceialchar.run();
+            }
+             else if (type.equals("numeric")){
+                 numr.run();
+            }
+
+
             float distance = dx*dx + dy*dy;  //d = root(x^2+y^2)
             double threshold = getWidth() * 0.2;
             // Added 360 to get rid of negative angles and
@@ -147,10 +168,35 @@ public class CustomView extends LinearLayout {
             double theta = (Math.toDegrees(Math.atan2(dx, dy)) - 45 + 360) % 360;
 
             if (distance < threshold * threshold ) {
+
                 // ic.get() will call getCurrentInputConnection from MyinputService and
                 // committext will set text on textfield.
-                ic.get().commitText(characters.get(0), 1);
-            } else {
+                int[] keyOrder = {4, 3, 2, 5, 0, 1, 6, 7, 8};
+
+                Map<Pair<Float, Float>, Integer> keyMap = new HashMap<>();
+
+                for (int i = 0; i < keyOrder.length; i++) {
+                    float x3 = ((i % 3) * 2 + 1) * getWidth() / 6;
+                    float y3 = ((i / 3) * 2 + 1) * getHeight() / 6;
+                    keyMap.put(Pair.create(x3, y3), keyOrder[i]);
+                }
+
+                for (Map.Entry<Pair<Float, Float>, Integer> e : keyMap.entrySet()) {
+                    Pair<Float, Float> point = e.getKey();
+                    Integer keyID = e.getValue();
+                    float dx = x2 - point.first;
+                    float dy = y2 - point.second;
+                    if (dx * dx + dy * dy < threshold * threshold) {
+                        ic.get().commitText(characters.get(keyID), 1);
+                        break;
+                    }
+                }
+
+                   // ic.get().commitText(characters.get(0), 1);
+
+            }
+
+            else {
                 if (theta < 22.5) {
                     ic.get().commitText(characters.get(8), 1);
                 } else if (theta<67.5){
@@ -173,6 +219,11 @@ public class CustomView extends LinearLayout {
                     } else {
                         no6function.run();
                     }
+                    /*
+                    if(thetha < 337.5)
+
+                    we can do the emoji here
+                     */
                 }
                 else if (theta<337.5){
                     ic.get().commitText(characters.get(7), 1);
@@ -202,6 +253,18 @@ public class CustomView extends LinearLayout {
 
     public void setLowercaseBackgroundFunc(Runnable lowercaseBackgroundFunc) {
         this.lowercaseBackgroundFunc = lowercaseBackgroundFunc;
+    }
+
+    public void setSpceialchar(Runnable numeric) {
+        this.spceialchar = numeric;
+    }
+
+    public void setSpecialcharbackground(Runnable specialcharbackground) {
+        this.specialcharbackground = specialcharbackground;
+    }
+
+    public void setLongpressdel(Runnable longpressdel) {
+        this.longpressdel = longpressdel;
     }
 
     @Override

@@ -1,22 +1,12 @@
 package com.akbor.studyproj;
 
-import android.graphics.Color;
-import android.hardware.camera2.params.InputConfiguration;
 import android.inputmethodservice.InputMethodService;
-import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputConnection;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import java.util.List;
+
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-
-import static com.akbor.studyproj.R.xml.key_layout;
 
 public class MyinputService extends InputMethodService implements KeyboardView.OnKeyboardActionListener {
 
@@ -66,6 +56,11 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         space.setInputConnection(this::getCurrentInputConnection);
         space.setAction(ic -> ic.commitText(" ", 1));
 
+        Runnable deleteonlongpress = () ->{
+            backspace.setAction(ic -> ic.deleteSurroundingText(3,0));
+        };
+
+        backspace.setLongpressdel(deleteonlongpress);
 
         capsLock.setToggleCapsLock(toggleCapsLock);
 
@@ -86,6 +81,50 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
             centerarea.setType("lower");
             rightarea.setType("lower");
         };
+
+        Runnable specialcharbackground = () -> {
+            leftarea.setBackground(getDrawable(R.drawable.hiddenl)); //needda change the background
+            centerarea.setBackground(getDrawable(R.drawable.middnum));
+            rightarea.setBackground(getDrawable(R.drawable.hiddenr));
+
+              leftarea.setType("spec");
+              centerarea.setType("spec");
+              rightarea.setType("spec");
+        };
+
+        Runnable numer =()-> {
+            leftarea.setCharacters(Stream.of("•", "/", "]", "`", "[", "\\", "", "✓", "❤️").collect(Collectors.toList()));
+            centerarea.setCharacters(Stream.of("5", "6", "3", "2", "1", "4", "7", "8", "9").collect(Collectors.toList()));
+            rightarea.setCharacters(Stream.of(".", ";", "√", "=", "-", ",", "0", "×", "’").collect(Collectors.toList()));
+            leftarea.setType("numeric");
+            centerarea.setType("numeric");
+            rightarea.setType("numeric");
+        };
+        Runnable specialchar = () -> {
+            leftarea.setBackground(getDrawable(R.drawable.charl));
+            centerarea.setBackground(getDrawable(R.drawable.number));
+            rightarea.setBackground(getDrawable(R.drawable.charr));
+            leftarea.setCharacters(Stream.of("°", "?", "}", "~", "{", "|", "", "¢", "❤️").collect(Collectors.toList()));
+            centerarea.setCharacters(Stream.of("%", "^", "#", "@", "!", "$", "&", "*", "(").collect(Collectors.toList()));
+            rightarea.setCharacters(Stream.of(">", ":", "±", "+", "—", "<", ")", "÷", "\"").collect(Collectors.toList()));
+
+            leftarea.setType("numeric");
+            centerarea.setType("numeric");
+            rightarea.setType("numeric");
+        };
+
+        leftarea.setNumer(numer);
+        centerarea.setNumer(numer);
+        rightarea.setNumer(numer);
+
+
+        leftarea.setSpceialchar(specialchar);
+        centerarea.setSpceialchar(specialchar);
+         rightarea.setSpceialchar(specialchar);
+
+        leftarea.setSpecialcharbackground(specialcharbackground);
+        centerarea.setSpecialcharbackground(specialcharbackground);
+        rightarea.setSpecialcharbackground(specialcharbackground);
 
         leftarea.setLowercaseBackgroundFunc(backgroundlower);
         centerarea.setLowercaseBackgroundFunc(backgroundlower);
@@ -111,9 +150,10 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
                 check = true;
             }
             else {
-                leftarea.setBackground(getDrawable(R.drawable.lgc));
+
+                leftarea.setBackground(getDrawable(R.drawable.charl));
                 centerarea.setBackground(getDrawable(R.drawable.number));
-                rightarea.setBackground(getDrawable(R.drawable.sign));
+                rightarea.setBackground(getDrawable(R.drawable.charr));
 
                 leftarea.setCharacters(Stream.of(".", "\"", ";", ",", ":", "'", " ", "!", "?").collect(Collectors.toList()));
                 centerarea.setCharacters(Stream.of("5", "6", "3", "2", "1", "4", "7", "8", "9").collect(Collectors.toList()));
@@ -123,7 +163,18 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
                 rightarea.setType("numeric");
                 check = false;
             }
+
+
         });
+
+//        if (leftarea.getType() == "spec" ||centerarea.getType() == "spec"|| rightarea.getType() == "spec" ){
+//            leftarea.setCharacters(Stream.of(".", "\"", ";", ",", ":", "'", " ", "!", "?").collect(Collectors.toList()));
+//            centerarea.setCharacters(Stream.of("5", "6", "3", "2", "1", "4", "7", "8", "9").collect(Collectors.toList()));
+//            rightarea.setCharacters(Stream.of("0", "&", "-", "@", "+", "$", "*", "#", "/").collect(Collectors.toList()));
+//            leftarea.setType("numeric");
+//            centerarea.setType("numeric");
+//            rightarea.setType("numeric");
+//        }
 
         return keyboardView;
     }
