@@ -27,7 +27,7 @@ public class CustomView extends LinearLayout {
 
 
 
-    private String type;
+    public String type;
     /**
      * A special function for the layer change
      */
@@ -37,6 +37,12 @@ public class CustomView extends LinearLayout {
     protected Runnable numr = null;
     protected Runnable spceialchar = null;
     protected Runnable specialcharbackground = null;
+
+    public void setEmoji(Runnable emoji) {
+        this.emoji = emoji;
+    }
+
+    protected Runnable emoji = null;
 
     protected Runnable longpressdel = null;
 
@@ -73,7 +79,7 @@ public class CustomView extends LinearLayout {
     /**
      *
      */
-    private Timer timer;
+    public Timer timer;
 
     /**
      * The list of characters corresponding to this keyboard section
@@ -167,6 +173,7 @@ public class CustomView extends LinearLayout {
             // the -45 is an offset to match the actual keyboard
             double theta = (Math.toDegrees(Math.atan2(dx, dy)) - 45 + 360) % 360;
 
+
             if (distance < threshold * threshold ) {
 
                 // ic.get() will call getCurrentInputConnection from MyinputService and
@@ -201,6 +208,7 @@ public class CustomView extends LinearLayout {
                     ic.get().commitText(characters.get(8), 1);
                 } else if (theta<67.5){
                     ic.get().commitText(characters.get(1), 1);
+
                 } else if (theta<112.5){
                     ic.get().commitText(characters.get(2), 1);
                 }
@@ -213,21 +221,18 @@ public class CustomView extends LinearLayout {
                 else if (theta<247.5){
                     ic.get().commitText(characters.get(5), 1);
                 }
-                else if (theta<292.5 ){
+                else if (theta<292.5 ) {
                     if (no6function == null) {
                         ic.get().commitText(characters.get(6), 1);
                     } else {
                         no6function.run();
-                    }
-                    /*
-                    if(thetha < 337.5)
-
-                    we can do the emoji here
-                     */
+                         }
                 }
                 else if (theta<337.5){
                     ic.get().commitText(characters.get(7), 1);
                 }
+
+
             }
             performClick();
             setUpperCase(false);

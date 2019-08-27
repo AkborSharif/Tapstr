@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="150dp"
         android:orientation="horizontal">
 
         <com.akbor.studyproj.CustomView
@@ -48,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="15"
-                android:background="@drawable/a1">
+                android:background="@drawable/a1black">
             </com.akbor.studyproj.CustomFunc>
 
             <com.akbor.studyproj.CustomFunc
@@ -56,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="15"
-                android:background="@drawable/a2">
+                android:background="@drawable/a2black">
             </com.akbor.studyproj.CustomFunc>
 
             <com.akbor.studyproj.CustomFunc
@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="15"
-                android:background="@drawable/a3">
+                android:background="@drawable/a3black">
             </com.akbor.studyproj.CustomFunc>
         </com.akbor.studyproj.Capslock>
 
