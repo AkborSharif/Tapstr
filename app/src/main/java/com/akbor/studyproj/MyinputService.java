@@ -35,14 +35,14 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         centerarea.setType("lower");
         rightarea.setType("lower");
 
-       // CustomCapsLock capsLock = keyboardView.findViewById(R.id.minipart);
-       // capsLock.setInputConnection(this::getCurrentInputConnection);
-//        Runnable toggleCapsLock = () -> {
-//            capsLock.setUpperCaseMode(!capsLock.isUpperCaseMode());
-//            leftarea.setUpperCase(capsLock.isUpperCaseMode());
-//            centerarea.setUpperCase(capsLock.isUpperCaseMode());
-//            rightarea.setUpperCase(capsLock.isUpperCaseMode());
-//        };
+        CustomCapsLock capsLock = keyboardView.findViewById(R.id.a0);
+       capsLock.setInputConnection(this::getCurrentInputConnection);
+        Runnable toggleCapsLock = () -> {
+            capsLock.setUpperCaseMode(!capsLock.isUpperCaseMode());
+            leftarea.setUpperCase(capsLock.isUpperCaseMode());
+            centerarea.setUpperCase(capsLock.isUpperCaseMode());
+            rightarea.setUpperCase(capsLock.isUpperCaseMode());
+        };
 
         CustomFunc newline  = keyboardView.findViewById(R.id.a1);
         newline.setInputConnection(this::getCurrentInputConnection);
@@ -62,7 +62,7 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
 
         backspace.setLongpressdel(deleteonlongpress);
 
-      //  capsLock.setToggleCapsLock(toggleCapsLock);
+       capsLock.setToggleCapsLock(toggleCapsLock);
 
         Runnable backgroundupper = () -> {
             leftarea.setBackground(getDrawable(R.drawable.upl));
