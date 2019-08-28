@@ -5,13 +5,12 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.View;
 
 public class CustomCapsLock extends CustomFunc {
 
     GestureDetector gestureDetector;
 
-    private boolean upperCaseMode = false;
+    private boolean upperCaseLocked = false;
 
     private Runnable toggleCapsLock;
 
@@ -31,20 +30,19 @@ public class CustomCapsLock extends CustomFunc {
         this.gestureDetector = gestureDetector;
     }
 
-    public boolean isUpperCaseMode() {
-        return upperCaseMode;
+    public boolean isUpperCaseLocked() {
+        return upperCaseLocked;
     }
 
-    public void setUpperCaseMode(boolean upperCaseMode) {
-        this.upperCaseMode = upperCaseMode;
+    public void setUpperCaseLocked(boolean upperCaseLocked) {
+        this.upperCaseLocked = upperCaseLocked;
     }
 
     // delegate the event to the gesture detector
     @Override
     public boolean onTouchEvent(MotionEvent e) {
         if (e.getAction()== MotionEvent.ACTION_UP) {
-
-            toggleCapsLock.run();
+              toggleCapsLock.run();
         }
         return gestureDetector.onTouchEvent(e);
     }

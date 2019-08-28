@@ -56,19 +56,7 @@ public class Capslock extends CustomView {
         }
 
         if (event.getAction() == MotionEvent.ACTION_UP){
-            x2 = event.getX();
-            y2 = event.getY();
-            dx = (x2-x);
-            dy = (y2-y);
 
-            if (dy<=0) {
-                setUpperCase(true);
-               toggleCapsLock.run();
-            }
-            else{
-                setUpperCase(false);
-                lowercaseBackgroundFunc.run();
-            }
 
         }
         return true;

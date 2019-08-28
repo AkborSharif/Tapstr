@@ -38,11 +38,22 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         CustomCapsLock capsLock = keyboardView.findViewById(R.id.a0);
        capsLock.setInputConnection(this::getCurrentInputConnection);
         Runnable toggleCapsLock = () -> {
-            capsLock.setUpperCaseMode(!capsLock.isUpperCaseMode());
-            leftarea.setUpperCase(capsLock.isUpperCaseMode());
-            centerarea.setUpperCase(capsLock.isUpperCaseMode());
-            rightarea.setUpperCase(capsLock.isUpperCaseMode());
+            capsLock.setUpperCaseLocked(!capsLock.isUpperCaseLocked());
+            leftarea.setUpperCase(capsLock.isUpperCaseLocked());
+            centerarea.setUpperCase(capsLock.isUpperCaseLocked());
+            rightarea.setUpperCase(capsLock.isUpperCaseLocked());
+            if (capsLock.isUpperCaseLocked()) {
+                leftarea.setBackground(getDrawable(R.drawable.upl));
+                centerarea.setBackground(getDrawable(R.drawable.upm));
+                rightarea.setBackground(getDrawable(R.drawable.upr));
+            } else {
+                leftarea.setBackground(getDrawable(R.drawable.first));
+                centerarea.setBackground(getDrawable(R.drawable.second));
+                rightarea.setBackground(getDrawable(R.drawable.third));
+            }
+
         };
+        capsLock.setToggleCapsLock(toggleCapsLock);
 
         CustomFunc newline  = keyboardView.findViewById(R.id.a1);
         newline.setInputConnection(this::getCurrentInputConnection);
@@ -62,7 +73,7 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
 
         backspace.setLongpressdel(deleteonlongpress);
 
-       capsLock.setToggleCapsLock(toggleCapsLock);
+
 
         Runnable backgroundupper = () -> {
             leftarea.setBackground(getDrawable(R.drawable.upl));

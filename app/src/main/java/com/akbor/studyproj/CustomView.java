@@ -38,12 +38,6 @@ public class CustomView extends LinearLayout {
     protected Runnable spceialchar = null;
     protected Runnable specialcharbackground = null;
 
-    public void setEmoji(Runnable emoji) {
-        this.emoji = emoji;
-    }
-
-    protected Runnable emoji = null;
-
     protected Runnable longpressdel = null;
 
     /**
@@ -155,9 +149,7 @@ public class CustomView extends LinearLayout {
              dx = (x2-x);
              dy = (y2-y);
 
-            if (type.equals("upper")) {
-                lowercaseBackgroundFunc.run();
-            }
+
 
             if (type.equals("spec")) {
                 spceialchar.run();
@@ -230,12 +222,20 @@ public class CustomView extends LinearLayout {
                 }
                 else if (theta<337.5){
                     ic.get().commitText(characters.get(7), 1);
+                } else if (theta < 360) {
+                    ic.get().commitText(characters.get(8), 1);
                 }
 
 
             }
             performClick();
-            setUpperCase(false);
+
+            if (type.equals("upper")) {
+                lowercaseBackgroundFunc.run();
+                setUpperCase(false);
+            }
+
+//            setUpperCase(false);
         }
         return true;
     }
