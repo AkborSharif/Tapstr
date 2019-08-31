@@ -35,25 +35,25 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         centerarea.setType("lower");
         rightarea.setType("lower");
 
-        CustomCapsLock capsLock = keyboardView.findViewById(R.id.a0);
-       capsLock.setInputConnection(this::getCurrentInputConnection);
-        Runnable toggleCapsLock = () -> {
-            capsLock.setUpperCaseLocked(!capsLock.isUpperCaseLocked());
-            leftarea.setUpperCase(capsLock.isUpperCaseLocked());
-            centerarea.setUpperCase(capsLock.isUpperCaseLocked());
-            rightarea.setUpperCase(capsLock.isUpperCaseLocked());
-            if (capsLock.isUpperCaseLocked()) {
-                leftarea.setBackground(getDrawable(R.drawable.upl));
-                centerarea.setBackground(getDrawable(R.drawable.upm));
-                rightarea.setBackground(getDrawable(R.drawable.upr));
-            } else {
-                leftarea.setBackground(getDrawable(R.drawable.first));
-                centerarea.setBackground(getDrawable(R.drawable.second));
-                rightarea.setBackground(getDrawable(R.drawable.third));
-            }
-
-        };
-        capsLock.setToggleCapsLock(toggleCapsLock);
+//        CustomCapsLock capsLock = keyboardView.findViewById(R.id.a0);
+//       capsLock.setInputConnection(this::getCurrentInputConnection);
+//        Runnable toggleCapsLock = () -> {
+//            capsLock.setUpperCaseLocked(!capsLock.isUpperCaseLocked());
+//            leftarea.setUpperCase(capsLock.isUpperCaseLocked());
+//            centerarea.setUpperCase(capsLock.isUpperCaseLocked());
+//            rightarea.setUpperCase(capsLock.isUpperCaseLocked());
+//            if (capsLock.isUpperCaseLocked()) {
+//                leftarea.setBackground(getDrawable(R.drawable.upl));
+//                centerarea.setBackground(getDrawable(R.drawable.upm));
+//                rightarea.setBackground(getDrawable(R.drawable.upr));
+//            } else {
+//                leftarea.setBackground(getDrawable(R.drawable.first));
+//                centerarea.setBackground(getDrawable(R.drawable.second));
+//                rightarea.setBackground(getDrawable(R.drawable.third));
+//            }
+//
+//        };
+//        capsLock.setToggleCapsLock(toggleCapsLock);
 
         CustomFunc newline  = keyboardView.findViewById(R.id.a1);
         newline.setInputConnection(this::getCurrentInputConnection);
@@ -66,13 +66,6 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         CustomFunc space = keyboardView.findViewById(R.id.a3);
         space.setInputConnection(this::getCurrentInputConnection);
         space.setAction(ic -> ic.commitText(" ", 1));
-
-        Runnable deleteonlongpress = () ->{
-            backspace.setAction(ic -> ic.deleteSurroundingText(3,0));
-        };
-
-        backspace.setLongpressdel(deleteonlongpress);
-
 
 
         Runnable backgroundupper = () -> {

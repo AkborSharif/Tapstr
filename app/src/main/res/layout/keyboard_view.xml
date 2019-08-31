@@ -44,21 +44,21 @@
             android:orientation="vertical"
             >
 
-            <com.akbor.studyproj.CustomCapsLock
-                android:id="@+id/a0"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="15"
-                android:background="@drawable/caps">
+            <!--<com.akbor.studyproj.CustomCapsLock-->
+                <!--android:id="@+id/a0"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="15"-->
+                <!--android:background="@drawable/caps">-->
 
-            </com.akbor.studyproj.CustomCapsLock>
+            <!--</com.akbor.studyproj.CustomCapsLock>-->
 
             <com.akbor.studyproj.CustomFunc
-                android:id="@+id/a1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="15"
-                android:background="@drawable/a1black">
+            android:id="@+id/a1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="15"
+            android:background="@drawable/a1black">
             </com.akbor.studyproj.CustomFunc>
 
             <com.akbor.studyproj.CustomFunc

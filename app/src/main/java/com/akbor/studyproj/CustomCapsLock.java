@@ -41,7 +41,8 @@ public class CustomCapsLock extends CustomFunc {
     // delegate the event to the gesture detector
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-        if (e.getAction()== MotionEvent.ACTION_UP) {
+        if (e.getAction()== MotionEvent.ACTION_UP)  {
+            //if (type.equals("numeric"))
               toggleCapsLock.run();
         }
         return gestureDetector.onTouchEvent(e);
