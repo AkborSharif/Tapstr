@@ -125,37 +125,48 @@ public class CustomView extends LinearLayout {
                     public void run() {
 
                         if (type.equals("lower")) {
-                            setUpperCase(true);
+                            //setUpperCase(true);
                             new Handler(Looper.getMainLooper()).post(uppercaseBackgroundFunc);
+                        }
+                        if (type.equals("upper")) {
+                           // setUpperCase(false);
+                            new Handler(Looper.getMainLooper()).post(lowercaseBackgroundFunc);
                         }
                     else if (type.equals("numeric")){
                             new Handler(Looper.getMainLooper()).post(specialcharbackground);
-
                         }
 
                     }
-                }, 500);
+                },150);
         }
 
 
 
         if (event.getAction() == MotionEvent.ACTION_UP) {
 
-//        if (type.equals("numeric")) {
+
            timer.cancel();
-//        }
+
+
              x2 = event.getX();
              y2 = event.getY();
              dx = (x2-x);
              dy = (y2-y);
 
+            if (type.equals("upper")) {
+                setUpperCase(true);
+                uppercaseBackgroundFunc.run();
+            }
+            if (type.equals("lower")) {
+                setUpperCase(false);
+                lowercaseBackgroundFunc.run();
+            }
 
 
-//            if (type.equals("spec")) { spceialchar.run(); }
-//            else if (type.equals("numeric")){ numr.run(); }
-//
-//            if (type.equals("upper")){setUpperCase(true);}
-//            else if (type.equals("lower")){setUpperCase(false);}
+            if (type.equals("spec")) { spceialchar.run(); }
+            else if (type.equals("numeric")){ numr.run(); }
+
+
 
             float distance = dx*dx + dy*dy;  //d = root(x^2+y^2)
             double threshold = getWidth() * 0.2;
@@ -177,7 +188,7 @@ public class CustomView extends LinearLayout {
                     float y3 = ((i / 3) * 2 + 1) * getHeight() / 6;
                     keyMap.put(Pair.create(x3, y3), keyOrder[i]);
                 }
-
+                    int count = 0;
                 for (Map.Entry<Pair<Float, Float>, Integer> e : keyMap.entrySet()) {
                     Pair<Float, Float> point = e.getKey();
                     Integer keyID = e.getValue();
@@ -185,6 +196,7 @@ public class CustomView extends LinearLayout {
                     float dy = y2 - point.second;
                     if (dx * dx + dy * dy < threshold * threshold) {
                         ic.get().commitText(characters.get(keyID), 1);
+                        count++;
                         break;
                     }
                 }
@@ -192,7 +204,6 @@ public class CustomView extends LinearLayout {
                    // ic.get().commitText(characters.get(0), 1);
 
             }
-
             else {
                 if (theta < 22.5) {
                     ic.get().commitText(characters.get(8), 1);
@@ -228,10 +239,11 @@ public class CustomView extends LinearLayout {
             }
             performClick();
 
-            if (type.equals("upper")) {
-                lowercaseBackgroundFunc.run();
-                setUpperCase(false);
-            }
+//           if (type.equals("upper")) {
+//               setUpperCase(true);
+//               uppercaseBackgroundFunc.run();
+//            }
+
 
 //            setUpperCase(false);
         }

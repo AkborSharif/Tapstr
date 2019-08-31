@@ -59,7 +59,14 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         newline.setInputConnection(this::getCurrentInputConnection);
         newline.setAction(ic -> ic.commitText("\n", 0));
 
+
+
+
         CustomFunc backspace  = keyboardView.findViewById(R.id.a2);
+        backspace.setInputConnection(this::getCurrentInputConnection);
+        backspace.setAction(ic -> ic.deleteSurroundingText(1,0));
+
+        Backspace longdelete = keyboardView.findViewById(R.id.a2);
         backspace.setInputConnection(this::getCurrentInputConnection);
         backspace.setAction(ic -> ic.deleteSurroundingText(1,0));
 
