@@ -3,13 +3,45 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/blue">
+
+    <LinearLayout
+        android:id="@+id/pre_bar"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:background="@color/grey"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/lightgrey" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_alignTop="@+id/pre_bar"
+            android:layout_weight="1"
+            android:background="@drawable/lightgrey" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/lightgrey" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_below="@id/pre_bar"
+        >
 
         <com.akbor.studyproj.CustomView
             android:id="@+id/leftarea"
@@ -25,7 +57,6 @@
             android:layout_height="match_parent"
             android:layout_weight="15"
             android:background="@drawable/second">
-
         </com.akbor.studyproj.CustomView>
 
         <com.akbor.studyproj.CustomView
@@ -41,24 +72,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="19"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <!--<com.akbor.studyproj.CustomCapsLock-->
-                <!--android:id="@+id/a0"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="15"-->
-                <!--android:background="@drawable/caps">-->
+            <!--android:id="@+id/a0"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="15"-->
+            <!--android:background="@drawable/caps">-->
 
             <!--</com.akbor.studyproj.CustomCapsLock>-->
 
             <com.akbor.studyproj.CustomFunc
-            android:id="@+id/a1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="15"
-            android:background="@drawable/a1black">
+                android:id="@+id/a1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:background="@drawable/a1black">
             </com.akbor.studyproj.CustomFunc>
 
             <com.akbor.studyproj.Backspace
@@ -76,8 +106,10 @@
                 android:layout_weight="15"
                 android:background="@drawable/a3black">
             </com.akbor.studyproj.CustomFunc>
+
         </com.akbor.studyproj.Capslock>
 
     </LinearLayout>
+
 </RelativeLayout>
 
