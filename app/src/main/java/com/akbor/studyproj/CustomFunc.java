@@ -16,20 +16,13 @@ public class CustomFunc extends CustomView {
     public void setAction(Consumer<InputConnection> action) {
         this.action = action;
     }
-
-//    public CustomFunc(Context context) {
-//        super(context, attrs, defStyleAttr, defStyleRes);
-//    }
-
     public CustomFunc(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, Consumer<InputConnection> action) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.action = action;
     }
-
     public CustomFunc(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
-
     public CustomFunc(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
@@ -42,15 +35,6 @@ public class CustomFunc extends CustomView {
             action.accept(ic.get());
         }
 
-
-
-
-
-
         return true;
     }
-
-
-
-
 }

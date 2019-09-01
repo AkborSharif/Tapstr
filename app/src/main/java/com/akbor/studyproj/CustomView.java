@@ -26,7 +26,6 @@ public class CustomView extends LinearLayout {
     protected Supplier<InputConnection> ic;
     public boolean text;
 
-
     public String type;
     /**
      * A special function for the layer change
@@ -139,13 +138,9 @@ public class CustomView extends LinearLayout {
                 },500);
         }
 
-
-
         if (event.getAction() == MotionEvent.ACTION_UP) {
 
-
            timer.cancel();
-
 
              x2 = event.getX();
              y2 = event.getY();
@@ -160,19 +155,14 @@ public class CustomView extends LinearLayout {
                 setUpperCase(false);
                 lowercaseBackgroundFunc.run();
             }
-
-
             if (type.equals("spec")) { spceialchar.run(); }
             else if (type.equals("numeric")){ numr.run(); }
-
-
 
             float distance = dx*dx + dy*dy;  //d = root(x^2+y^2)
             double threshold = getWidth() * 0.2;
             // Added 360 to get rid of negative angles and
             // the -45 is an offset to match the actual keyboard
             double theta = (Math.toDegrees(Math.atan2(dx, dy)) - 45 + 360) % 360;
-
 
             if (distance < threshold * threshold ) {
 
@@ -198,9 +188,7 @@ public class CustomView extends LinearLayout {
                         break;
                     }
                 }
-
                    // ic.get().commitText(characters.get(0), 1);
-
             }
             else {
                 if (theta < 22.5) {
@@ -232,7 +220,6 @@ public class CustomView extends LinearLayout {
                 } else if (theta < 360) {
                     ic.get().commitText(characters.get(8), 1);
                 }
-
 
             }
             performClick();

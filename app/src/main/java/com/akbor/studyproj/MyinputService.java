@@ -2,7 +2,9 @@ package com.akbor.studyproj;
 
 import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.KeyboardView;
+import android.view.SearchEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 
 import java.util.stream.Collectors;
@@ -21,11 +23,9 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         //"collect" converts the stream back to the list
         leftarea.setCharacters(Stream.of("s", "d", "e", "w", "q", "a", "", "z", "x").collect(Collectors.toList()));
 
-
         CustomView centerarea = keyboardView.findViewById(R.id.centerarea);
         centerarea.setInputConnection(this::getCurrentInputConnection);
         centerarea.setCharacters(Stream.of("g", "h", "y", "t", "r", "f", "c", "v", "b").collect(Collectors.toList()));
-
 
         CustomView rightarea = keyboardView.findViewById(R.id.rightarea);
         rightarea.setInputConnection(this::getCurrentInputConnection);
@@ -60,12 +60,9 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         newline.setAction(ic -> ic.commitText("\n", 0));
 
 
-
-
 //        CustomFunc backspace  = keyboardView.findViewById(R.id.a2);
 //        backspace.setInputConnection(this::getCurrentInputConnection);
 //        backspace.setAction(ic -> ic.deleteSurroundingText(1,0));
-
 
         Backspace longdelete = keyboardView.findViewById(R.id.a2);
         longdelete.setInputConnection(this::getCurrentInputConnection);
@@ -75,7 +72,6 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         space.setInputConnection(this::getCurrentInputConnection);
         space.setAction(ic -> ic.commitText(" ", 1));
 
-
         Runnable backgroundupper = () -> {
             leftarea.setBackground(getDrawable(R.drawable.upl));
             centerarea.setBackground(getDrawable(R.drawable.upm));
@@ -84,7 +80,6 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
             centerarea.setType("upper");
             rightarea.setType("upper");
         };
-
         Runnable backgroundlower = () -> {
             leftarea.setBackground(getDrawable(R.drawable.first));
             centerarea.setBackground(getDrawable(R.drawable.second));
@@ -93,7 +88,6 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
             centerarea.setType("lower");
             rightarea.setType("lower");
         };
-
         Runnable specialcharbackground = () -> {
             leftarea.setBackground(getDrawable(R.drawable.emoj1));
             centerarea.setBackground(getDrawable(R.drawable.middnum));
@@ -103,7 +97,6 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
               centerarea.setType("spec");
               rightarea.setType("spec");
         };
-
         Runnable numer =()-> {
             leftarea.setCharacters(Stream.of("•", "/", "]", "`", "[", "\\", "", "✓", "️🙂").collect(Collectors.toList()));
             centerarea.setCharacters(Stream.of("5", "6", "3", "2", "1", "4", "7", "8", "9").collect(Collectors.toList()));
@@ -129,10 +122,9 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         centerarea.setNumer(numer);
         rightarea.setNumer(numer);
 
-
         leftarea.setSpceialchar(specialchar);
         centerarea.setSpceialchar(specialchar);
-         rightarea.setSpceialchar(specialchar);
+        rightarea.setSpceialchar(specialchar);
 
         leftarea.setSpecialcharbackground(specialcharbackground);
         centerarea.setSpecialcharbackground(specialcharbackground);
@@ -156,6 +148,7 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
                 leftarea.setCharacters(Stream.of("s", "d", "e", "w", "q", "a", "", "z", "x").collect(Collectors.toList()));
                 centerarea.setCharacters(Stream.of("g", "h", "y", "t", "r", "f", "c", "v", "b").collect(Collectors.toList()));
                 rightarea.setCharacters(Stream.of("k", "l", "o", "i", "u", "j", "n", "m", "p").collect(Collectors.toList()));
+
                 leftarea.setType("lower");
                 centerarea.setType("lower");
                 rightarea.setType("lower");
@@ -181,7 +174,6 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
 
         return keyboardView;
     }
-
 
     @Override
     public void onPress(int primaryCode) {

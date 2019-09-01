@@ -14,8 +14,6 @@ public class Backspace extends CustomFunc {
     public Timer timer;
     public boolean onTouchEvent(MotionEvent event) {
 
-
-
         if (event.getAction()== MotionEvent.ACTION_DOWN)
         {
             timer = new Timer();
@@ -33,7 +31,6 @@ public class Backspace extends CustomFunc {
                         },200, 50);
                 }
             },500);
-c
         }
         if (event.getAction()== MotionEvent.ACTION_UP){
             timer.cancel();
