@@ -19,7 +19,7 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         CustomView leftarea = keyboardView.findViewById(R.id.leftarea);
         leftarea.setInputConnection(this::getCurrentInputConnection);
         //"collect" converts the stream back to the list
-        leftarea.setCharacters(Stream.of("s", "d", "e", "w", "q", "a", " ", "z", "x").collect(Collectors.toList()));
+        leftarea.setCharacters(Stream.of("s", "d", "e", "w", "q", "a", "", "z", "x").collect(Collectors.toList()));
 
 
         CustomView centerarea = keyboardView.findViewById(R.id.centerarea);
@@ -62,13 +62,14 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
 
 
 
-        CustomFunc backspace  = keyboardView.findViewById(R.id.a2);
-        backspace.setInputConnection(this::getCurrentInputConnection);
-        backspace.setAction(ic -> ic.deleteSurroundingText(1,0));
+//        CustomFunc backspace  = keyboardView.findViewById(R.id.a2);
+//        backspace.setInputConnection(this::getCurrentInputConnection);
+//        backspace.setAction(ic -> ic.deleteSurroundingText(1,0));
+
 
         Backspace longdelete = keyboardView.findViewById(R.id.a2);
-        backspace.setInputConnection(this::getCurrentInputConnection);
-        backspace.setAction(ic -> ic.deleteSurroundingText(1,0));
+        longdelete.setInputConnection(this::getCurrentInputConnection);
+        longdelete.setAction(ic -> ic.deleteSurroundingText(1,0));
 
         CustomFunc space = keyboardView.findViewById(R.id.a3);
         space.setInputConnection(this::getCurrentInputConnection);

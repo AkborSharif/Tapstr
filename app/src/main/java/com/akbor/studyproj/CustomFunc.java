@@ -5,6 +5,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.inputmethod.InputConnection;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.function.Consumer;
 
 public class CustomFunc extends CustomView {
@@ -39,6 +41,11 @@ public class CustomFunc extends CustomView {
         {
             action.accept(ic.get());
         }
+
+
+
+
+
 
         return true;
     }

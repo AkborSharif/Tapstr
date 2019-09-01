@@ -24,7 +24,7 @@ public class CustomView extends LinearLayout {
      * supplier is a callback function to get the inputconnection from the {@link MyinputService}
      */
     protected Supplier<InputConnection> ic;
-
+    public boolean text;
 
 
     public String type;
@@ -37,7 +37,6 @@ public class CustomView extends LinearLayout {
     protected Runnable numr = null;
     protected Runnable spceialchar = null;
     protected Runnable specialcharbackground = null;
-
 
 
     /**
@@ -137,7 +136,7 @@ public class CustomView extends LinearLayout {
                         }
 
                     }
-                },150);
+                },500);
         }
 
 
@@ -188,7 +187,7 @@ public class CustomView extends LinearLayout {
                     float y3 = ((i / 3) * 2 + 1) * getHeight() / 6;
                     keyMap.put(Pair.create(x3, y3), keyOrder[i]);
                 }
-                    int count = 0;
+
                 for (Map.Entry<Pair<Float, Float>, Integer> e : keyMap.entrySet()) {
                     Pair<Float, Float> point = e.getKey();
                     Integer keyID = e.getValue();
@@ -196,7 +195,6 @@ public class CustomView extends LinearLayout {
                     float dy = y2 - point.second;
                     if (dx * dx + dy * dy < threshold * threshold) {
                         ic.get().commitText(characters.get(keyID), 1);
-                        count++;
                         break;
                     }
                 }

@@ -19,14 +19,26 @@ public class Backspace extends CustomFunc {
         if (event.getAction()== MotionEvent.ACTION_DOWN)
         {
             timer = new Timer();
+            //action.accept(ic.get());
+
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    action.accept(ic.get());
+                    timer = new Timer();
+                        timer.scheduleAtFixedRate(new TimerTask() {
+                            @Override
+                            public void run() {
+                                action.accept(ic.get());
+                            }
+                        },200, 50);
                 }
-            },100,300);
+            },500);
+c
+        }
+        if (event.getAction()== MotionEvent.ACTION_UP){
+            timer.cancel();
 
-
+            action.accept(ic.get());
         }
 
         return true;
