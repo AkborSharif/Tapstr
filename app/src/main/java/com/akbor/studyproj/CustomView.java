@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -24,9 +25,13 @@ public class CustomView extends LinearLayout {
      * supplier is a callback function to get the inputconnection from the {@link MyinputService}
      */
     protected Supplier<InputConnection> ic;
+
     public boolean text;
 
     public String type;
+
+    public Consumer<String> predictionCallback = null;
+
     /**
      * A special function for the layer change
      */
@@ -184,41 +189,40 @@ public class CustomView extends LinearLayout {
                     float dx = x2 - point.first;
                     float dy = y2 - point.second;
                     if (dx * dx + dy * dy < threshold * threshold) {
-                        ic.get().commitText(characters.get(keyID), 1);
+                        commitText(characters.get(keyID));
                         break;
                     }
                 }
-                   // ic.get().commitText(characters.get(0), 1);
             }
             else {
                 if (theta < 22.5) {
-                    ic.get().commitText(characters.get(8), 1);
+                    commitText(characters.get(8));
                 } else if (theta<67.5){
-                    ic.get().commitText(characters.get(1), 1);
+                    commitText(characters.get(1));
 
                 } else if (theta<112.5){
-                    ic.get().commitText(characters.get(2), 1);
+                    commitText(characters.get(2));
                 }
                 else if (theta<157.5 ){
-                    ic.get().commitText(characters.get(3), 1);
+                    commitText(characters.get(3));
                 }
                 else if (theta<202.5){
-                    ic.get().commitText(characters.get(4), 1);
+                    commitText(characters.get(4));
                 }
                 else if (theta<247.5){
-                    ic.get().commitText(characters.get(5), 1);
+                    commitText(characters.get(5));
                 }
                 else if (theta<292.5 ) {
                     if (no6function == null) {
-                        ic.get().commitText(characters.get(6), 1);
+                        commitText(characters.get(6));
                     } else {
                         no6function.run();
                          }
                 }
                 else if (theta<337.5){
-                    ic.get().commitText(characters.get(7), 1);
+                    commitText(characters.get(7));
                 } else if (theta < 360) {
-                    ic.get().commitText(characters.get(8), 1);
+                    commitText(characters.get(8));
                 }
 
             }
@@ -261,6 +265,21 @@ public class CustomView extends LinearLayout {
 
     public void setSpecialcharbackground(Runnable specialcharbackground) {
         this.specialcharbackground = specialcharbackground;
+    }
+
+    private void commitText(String text) {
+        ic.get().commitText(text, 1);
+        if (predictionCallback != null) {
+            predictionCallback.accept(text);
+        }
+    }
+
+    public Consumer<String> getPredictionCallback() {
+        return predictionCallback;
+    }
+
+    public void setPredictionCallback(Consumer<String> predictionCallback) {
+        this.predictionCallback = predictionCallback;
     }
 
     @Override

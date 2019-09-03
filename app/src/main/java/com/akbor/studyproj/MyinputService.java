@@ -2,9 +2,7 @@ package com.akbor.studyproj;
 
 import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.KeyboardView;
-import android.view.SearchEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 
 import java.util.stream.Collectors;
@@ -14,22 +12,31 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
 
     private View keyboardView;
     boolean check = true;
+
+
+
     @Override
     public View onCreateInputView() {
         keyboardView = getLayoutInflater().inflate(R.layout.keyboard_view, null);
+
+        PredictionKey firstlayer = keyboardView.findViewById(R.id.pred1);
+        firstlayer.setIc(this::getCurrentInputConnection);
 
         CustomView leftarea = keyboardView.findViewById(R.id.leftarea);
         leftarea.setInputConnection(this::getCurrentInputConnection);
         //"collect" converts the stream back to the list
         leftarea.setCharacters(Stream.of("s", "d", "e", "w", "q", "a", "", "z", "x").collect(Collectors.toList()));
+        leftarea.setPredictionCallback(firstlayer::append);
 
         CustomView centerarea = keyboardView.findViewById(R.id.centerarea);
         centerarea.setInputConnection(this::getCurrentInputConnection);
         centerarea.setCharacters(Stream.of("g", "h", "y", "t", "r", "f", "c", "v", "b").collect(Collectors.toList()));
+        centerarea.setPredictionCallback(firstlayer::append);
 
         CustomView rightarea = keyboardView.findViewById(R.id.rightarea);
         rightarea.setInputConnection(this::getCurrentInputConnection);
         rightarea.setCharacters(Stream.of("k", "l", "o", "i", "u", "j", "n", "m", "p").collect(Collectors.toList()));
+        rightarea.setPredictionCallback(firstlayer::append);
 
         leftarea.setType("lower");
         centerarea.setType("lower");
@@ -67,10 +74,24 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         Backspace longdelete = keyboardView.findViewById(R.id.a2);
         longdelete.setInputConnection(this::getCurrentInputConnection);
         longdelete.setAction(ic -> ic.deleteSurroundingText(1,0));
+        longdelete.setPredictionBarDeleteAction(() -> {
+            if (firstlayer.getText().length() > 0) {
+                firstlayer.setText(firstlayer.getText().subSequence(0, firstlayer.getText().length() - 1));
+            }
+        });
+
+
+
 
         CustomFunc space = keyboardView.findViewById(R.id.a3);
         space.setInputConnection(this::getCurrentInputConnection);
         space.setAction(ic -> ic.commitText(" ", 1));
+        space.setPredictionBarSpaceAction(()->{
+            if (firstlayer.getText().length() > 0) {
+                firstlayer.setText(firstlayer.getText().subSequence(0, firstlayer.getText().length() - firstlayer.getText().length()));
+            }
+        });
+
 
         Runnable backgroundupper = () -> {
             leftarea.setBackground(getDrawable(R.drawable.upl));
@@ -171,6 +192,8 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
             }
 
         });
+
+
 
         return keyboardView;
     }

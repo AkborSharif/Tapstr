@@ -1,6 +1,8 @@
 package com.akbor.studyproj;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
@@ -11,6 +13,10 @@ public class Backspace extends CustomFunc {
     public Backspace(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
+    Runnable predictionBarDeleteAction;
+
+
+
     public Timer timer;
     public boolean onTouchEvent(MotionEvent event) {
 
@@ -27,6 +33,7 @@ public class Backspace extends CustomFunc {
                             @Override
                             public void run() {
                                 action.accept(ic.get());
+                                new Handler(Looper.getMainLooper()).post(predictionBarDeleteAction);
                             }
                         },200, 50);
                 }
@@ -34,10 +41,19 @@ public class Backspace extends CustomFunc {
         }
         if (event.getAction()== MotionEvent.ACTION_UP){
             timer.cancel();
-
+            predictionBarDeleteAction.run();
             action.accept(ic.get());
         }
 
         return true;
     }
+
+    public Runnable getPredictionBarDeleteAction() {
+        return predictionBarDeleteAction;
+    }
+
+    public void setPredictionBarDeleteAction(Runnable predictionBarDeleteAction) {
+        this.predictionBarDeleteAction = predictionBarDeleteAction;
+    }
+
 }

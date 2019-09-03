@@ -10,9 +10,15 @@ import java.util.TimerTask;
 import java.util.function.Consumer;
 
 public class CustomFunc extends CustomView {
-
+    Runnable predictionBarSpaceAction;
     Consumer<InputConnection> action;
+    public Runnable getPredictionBarSpaceAction() {
+        return predictionBarSpaceAction;
+    }
 
+    public void setPredictionBarSpaceAction(Runnable predictionBarSpaceAction) {
+        this.predictionBarSpaceAction = predictionBarSpaceAction;
+    }
     public void setAction(Consumer<InputConnection> action) {
         this.action = action;
     }
@@ -33,6 +39,7 @@ public class CustomFunc extends CustomView {
         if (event.getAction()== MotionEvent.ACTION_UP)
         {
             action.accept(ic.get());
+            predictionBarSpaceAction.run();
         }
 
         return true;
