@@ -23,6 +23,8 @@ public class PredictionKey extends AppCompatTextView {
 //
     CharSequence str1;
 
+    Runnable commitTextAction;
+
     public void setIc(Supplier<InputConnection> ic) {
         this.ic = ic;
     }
@@ -63,9 +65,7 @@ public class PredictionKey extends AppCompatTextView {
         if (event.getAction() == MotionEvent.ACTION_DOWN){}
 
         if (event.getAction() == MotionEvent.ACTION_UP){
-            if (getText()!=null) {
-                ic.get().deleteSurroundingText(getText().length(), 0);
-            }
+            commitTextAction.run();
             ic.get().commitText(getText() + " ", 1);
             this.setText("");
 
@@ -75,6 +75,10 @@ public class PredictionKey extends AppCompatTextView {
 
         performClick();
         return true;
+    }
+
+    public void onCommitTextAction(Runnable commitTextAction) {
+        this.commitTextAction = commitTextAction;
     }
 
     @Override

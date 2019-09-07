@@ -9,7 +9,7 @@
     <com.akbor.studyproj.PredictionView
         android:id="@+id/pre_bar"
         android:layout_width="match_parent"
-        android:layout_height="60px"
+        android:layout_height="72px"
         android:background="@color/darkaqua"
         android:orientation="horizontal">
 
@@ -43,27 +43,21 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="test"
-            android:textStyle="bold"
-            android:textSize="18dp" />
+            android:textSize="14dp" />
         <com.akbor.studyproj.PredictionKey
             android:id="@+id/pred2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="ppp"
-            android:textStyle="bold"
-            android:textSize="18dp"/>
+            android:textSize="14dp"/>
         <com.akbor.studyproj.PredictionKey
             android:id="@+id/pred3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="text"
-            android:textStyle="bold"
-            android:textSize="18dp"/>
+            android:textSize="14dp"/>
     </com.akbor.studyproj.PredictionView>
 
     <LinearLayout
@@ -97,47 +91,14 @@
             android:background="@drawable/third">
         </com.akbor.studyproj.CustomView>
 
-        <com.akbor.studyproj.Capslock
+        <com.akbor.studyproj.InputMethodAction
             android:id="@+id/minipart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="19"
-            android:orientation="vertical">
+            android:layout_weight="19">
+        </com.akbor.studyproj.InputMethodAction>
 
-            <!--<com.akbor.studyproj.CustomCapsLock-->
-            <!--android:id="@+id/a0"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="15"-->
-            <!--android:background="@drawable/caps">-->
 
-            <!--</com.akbor.studyproj.CustomCapsLock>-->
-
-            <com.akbor.studyproj.CustomFunc
-                android:id="@+id/a1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="15"
-                android:background="@drawable/a1black">
-            </com.akbor.studyproj.CustomFunc>
-
-            <com.akbor.studyproj.Backspace
-                android:id="@+id/a2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="15"
-                android:background="@drawable/a2black">
-            </com.akbor.studyproj.Backspace>
-
-            <com.akbor.studyproj.CustomFunc
-                android:id="@+id/a3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="15"
-                android:background="@drawable/a3black">
-            </com.akbor.studyproj.CustomFunc>
-
-        </com.akbor.studyproj.Capslock>
 
     </LinearLayout>
 

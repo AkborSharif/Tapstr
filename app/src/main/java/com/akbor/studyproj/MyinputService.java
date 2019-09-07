@@ -73,6 +73,22 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         centerarea.setType("lower");
         rightarea.setType("lower");
 
+
+        firstlayer.onCommitTextAction(() -> {
+            getCurrentInputConnection().deleteSurroundingText(currentInput.length(), 0);
+            secondlayer.setText("");
+            thirdlayer.setText("");
+        });
+        secondlayer.onCommitTextAction(() -> {
+            getCurrentInputConnection().deleteSurroundingText(currentInput.length(), 0);
+            firstlayer.setText("");
+            thirdlayer.setText("");
+        });
+        thirdlayer.onCommitTextAction(() -> {
+            getCurrentInputConnection().deleteSurroundingText(currentInput.length(), 0);
+            firstlayer.setText("");
+            secondlayer.setText("");
+        });
 //        CustomCapsLock capsLock = keyboardView.findViewById(R.id.a0);
 //       capsLock.setInputConnection(this::getCurrentInputConnection);
 //        Runnable toggleCapsLock = () -> {
@@ -93,37 +109,27 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
 //        };
 //        capsLock.setToggleCapsLock(toggleCapsLock);
 
-        CustomFunc newline  = keyboardView.findViewById(R.id.a1);
-        newline.setInputConnection(this::getCurrentInputConnection);
-        newline.setAction(ic -> ic.commitText("\n", 0));
 
+        InputMethodAction inputMethodAction = keyboardView.findViewById(R.id.minipart);
+        inputMethodAction.setInputConnection(this::getCurrentInputConnection);
+        inputMethodAction.setEnterKeyAction(()-> this.getCurrentInputConnection().commitText("\n", 0));
 
-//        CustomFunc backspace  = keyboardView.findViewById(R.id.a2);
-//        backspace.setInputConnection(this::getCurrentInputConnection);
-//        backspace.setAction(ic -> ic.deleteSurroundingText(1,0));
-
-        Backspace longdelete = keyboardView.findViewById(R.id.a2);
-        longdelete.setInputConnection(this::getCurrentInputConnection);
-        longdelete.setAction(ic -> ic.deleteSurroundingText(1,0));
-        longdelete.setPredictionBarDeleteAction(() -> {
+        inputMethodAction.setPredictionBarDeleteAction(() -> {
             if (firstlayer.getText().length() > 0) {
                 firstlayer.setText(firstlayer.getText().subSequence(0, firstlayer.getText().length() - 1));
             }
         });
-        longdelete.setCurrentTextSetter(input -> currentInput = input);
-        longdelete.setCurrentTextGetter(()-> currentInput);
-
-
-        CustomFunc space = keyboardView.findViewById(R.id.a3);
-        space.setInputConnection(this::getCurrentInputConnection);
-        space.setAction(ic -> ic.commitText(" ", 1));
-        space.setPredictionBarSpaceAction(()->{
+        inputMethodAction.setSpaceBarAction(()->this.getCurrentInputConnection().commitText(" ", 1));
+        inputMethodAction.setPredictionBarSpaceAction(()->{
             if (firstlayer.getText().length() > 0) {
 //                firstlayer.setText(firstlayer.getText().subSequence(0, firstlayer.getText().length() - firstlayer.getText().length()));
                 firstlayer.setText("");
             }
         });
 
+        inputMethodAction.setCurrentTextSetter(input -> currentInput = input);
+        inputMethodAction.setCurrentTextGetter(()-> currentInput);
+        inputMethodAction.onBackspaceAction(() -> placeholder(secondlayer, thirdlayer));
 
         Runnable backgroundupper = () -> {
             leftarea.setBackground(getDrawable(R.drawable.upl));
