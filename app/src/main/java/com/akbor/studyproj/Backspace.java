@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.inputmethod.InputConnection;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -32,8 +33,7 @@ public class Backspace extends CustomFunc {
                         timer.scheduleAtFixedRate(new TimerTask() {
                             @Override
                             public void run() {
-                                action.accept(ic.get());
-                                new Handler(Looper.getMainLooper()).post(predictionBarDeleteAction);
+                                backspace();
                             }
                         },200, 50);
                 }
@@ -41,11 +41,23 @@ public class Backspace extends CustomFunc {
         }
         if (event.getAction()== MotionEvent.ACTION_UP){
             timer.cancel();
-            predictionBarDeleteAction.run();
-            action.accept(ic.get());
+            backspace();
         }
 
         return true;
+    }
+
+    private void backspace() {
+        ic.get().deleteSurroundingText(1, 0);
+        String currentInput = "";
+        if (currentTextGetter != null) {
+            currentInput = currentTextGetter.get();
+        }
+        if (currentInput.length() > 0) {
+            currentTextSetter.accept(currentInput.substring(0, currentInput.length() - 1));
+        }
+//        predictionBarDeleteAction.run();
+        new Handler(Looper.getMainLooper()).post(predictionBarDeleteAction);
     }
 
     public Runnable getPredictionBarDeleteAction() {

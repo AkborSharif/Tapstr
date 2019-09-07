@@ -8,6 +8,8 @@ import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.inputmethod.InputConnection;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,13 +26,17 @@ public class CustomView extends LinearLayout {
     /**
      * supplier is a callback function to get the inputconnection from the {@link MyinputService}
      */
-    protected Supplier<InputConnection> ic;
+    protected Runnable updatebars = null;
 
-    public boolean text;
+    protected Supplier<InputConnection> ic;
 
     public String type;
 
     public Consumer<String> predictionCallback = null;
+
+    public Consumer<String> currentTextSetter = null;
+
+    public Supplier<String> currentTextGetter = null;
 
     /**
      * A special function for the layer change
@@ -73,24 +79,22 @@ public class CustomView extends LinearLayout {
      */
     boolean upperCase = false;
 
-    /**
-     *
-     */
     public Timer timer;
 
     /**
      * The list of characters corresponding to this keyboard section
      */
     List<String> characters;
+
     public CustomView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context);
+        super(context); //setup();
     }
-
     public CustomView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        super(context, attrs); //setup();
     }
 
-    public CustomView(Context context, AttributeSet attrs, int defStyleAttr) { super(context, attrs, defStyleAttr); }
+    public CustomView(Context context, AttributeSet attrs, int defStyleAttr) { super(context, attrs, defStyleAttr); //setup();
+         }
 
     public void setInputConnection(Supplier<InputConnection> getIC) {
         ic = getIC;
@@ -116,7 +120,8 @@ public class CustomView extends LinearLayout {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean onTouchEvent(MotionEvent event)
+    {
         super.onTouchEvent(event);
         if (event.getAction()== MotionEvent.ACTION_DOWN) {
             x = event.getX();
@@ -173,6 +178,7 @@ public class CustomView extends LinearLayout {
 
                 // ic.get() will call getCurrentInputConnection from MyinputService and
                 // committext will set text on textfield.
+               /**
                 int[] keyOrder = {4, 3, 2, 5, 0, 1, 6, 7, 8};
 
                 Map<Pair<Float, Float>, Integer> keyMap = new HashMap<>();
@@ -192,7 +198,8 @@ public class CustomView extends LinearLayout {
                         commitText(characters.get(keyID));
                         break;
                     }
-                }
+                } **/
+               commitText(characters.get(0));
             }
             else {
                 if (theta < 22.5) {
@@ -239,6 +246,74 @@ public class CustomView extends LinearLayout {
         return true;
     }
 
+
+
+    /**
+     * taken from geeks for geeks
+     * */
+
+//    static int min(int x,int y,int z)
+//    {
+//        if (x <= y && x <= z) return x;
+//        if (y <= x && y <= z) return y;
+//        else return z;
+//    }
+
+//    static int editDistDP(CharSequence str1, CharSequence str2, int m, int n) {
+//        // Create a table to store results of subproblems
+//        int dp[][] = new int[m + 1][n + 1];
+//
+//        // Fill d[][] in bottom up manner
+//        for (int i = 0; i <= m; i++) {
+//            for (int j = 0; j <= n; j++) {
+//                // If first string is empty, only option is to
+//                // insert all characters of second string
+//                if (i == 0)
+//                    dp[i][j] = j;  // Min. operations = j
+//
+//                    // If second string is empty, only option is to
+//                    // remove all characters of second string
+//                else if (j == 0)
+//                    dp[i][j] = i; // Min. operations = i
+//
+//                    // If last characters are same, ignore last char
+//                    // and recur for remaining string
+//                else if (str1.charAt(i - 1) == str2.charAt(j - 1))
+//                    dp[i][j] = dp[i - 1][j - 1];
+//
+//                    // If the last character is different, consider all
+//                    // possibilities and find the minimum
+//                else
+//                    dp[i][j] = 1 + min(dp[i][j - 1],  // Insert
+//                            dp[i - 1][j],  // Remove
+//                            dp[i - 1][j - 1]); // Replace
+//            }
+//        }
+//        return dp[m][n];
+//    }
+
+        private void commitText(String text) {
+
+
+            ic.get().commitText(text, 1);
+
+            String currentInput = currentTextGetter.get();
+            //System.out.println(currentInput);
+            if (currentTextSetter!=null) {
+                currentTextSetter.accept(currentInput + text);
+            }
+            if (predictionCallback != null) {
+                predictionCallback.accept(text);
+            }
+//                System.out.print(fisrtword);
+//                System.out.print(secondword);
+
+            updatebars.run();
+
+
+    }
+
+
     public void setCharacters(List<String> characters) {
         this.characters = characters;
     }
@@ -267,19 +342,38 @@ public class CustomView extends LinearLayout {
         this.specialcharbackground = specialcharbackground;
     }
 
-    private void commitText(String text) {
-        ic.get().commitText(text, 1);
-        if (predictionCallback != null) {
-            predictionCallback.accept(text);
-        }
-    }
-
     public Consumer<String> getPredictionCallback() {
         return predictionCallback;
     }
 
+    public Consumer<String> getCurrentTextSetter() {
+        return currentTextSetter;
+    }
+
+    public void setCurrentTextSetter(Consumer<String> currentTextSetter) {
+        this.currentTextSetter = currentTextSetter;
+    }
+
     public void setPredictionCallback(Consumer<String> predictionCallback) {
         this.predictionCallback = predictionCallback;
+
+
+    }
+
+    public Supplier<String> getCurrentTextGetter() {
+        return currentTextGetter;
+    }
+
+    public void setCurrentTextGetter(Supplier<String> currentTextGetter) {
+        this.currentTextGetter = currentTextGetter;
+    }
+
+    public Runnable getUpdatebars() {
+        return updatebars;
+    }
+
+    public void setUpdatebars(Runnable updatebars) {
+        this.updatebars = updatebars;
     }
 
     @Override

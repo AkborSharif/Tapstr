@@ -3,6 +3,7 @@ package com.akbor.studyproj;
 import android.content.Context;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.inputmethod.InputConnection;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -45,9 +46,6 @@ public class PredictionView extends LinearLayout {
         setup();
     }
 
-
-
-
     private void setup() {
 
         ObjectMapper mapper = new ObjectMapper();
@@ -56,12 +54,10 @@ public class PredictionView extends LinearLayout {
 
         try {
             words = mapper.readValue(dict, List.class);
-            System.out.println(words);
+           // System.out.println(words);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        
 
     }
 

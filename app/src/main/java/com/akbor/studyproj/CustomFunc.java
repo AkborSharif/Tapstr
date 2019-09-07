@@ -39,7 +39,9 @@ public class CustomFunc extends CustomView {
         if (event.getAction()== MotionEvent.ACTION_UP)
         {
             action.accept(ic.get());
-            predictionBarSpaceAction.run();
+            if(predictionBarSpaceAction!= null) {
+                predictionBarSpaceAction.run();
+            }
         }
 
         return true;

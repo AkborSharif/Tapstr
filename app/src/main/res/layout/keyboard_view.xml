@@ -9,7 +9,7 @@
     <com.akbor.studyproj.PredictionView
         android:id="@+id/pre_bar"
         android:layout_width="match_parent"
-        android:layout_height="80px"
+        android:layout_height="60px"
         android:background="@color/darkaqua"
         android:orientation="horizontal">
 
@@ -45,28 +45,30 @@
             android:gravity="center"
             android:text="test"
             android:textStyle="bold"
-            android:textSize="18dp"
-
-            />
+            android:textSize="18dp" />
         <com.akbor.studyproj.PredictionKey
             android:id="@+id/pred2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text=""/>
+            android:text="ppp"
+            android:textStyle="bold"
+            android:textSize="18dp"/>
         <com.akbor.studyproj.PredictionKey
             android:id="@+id/pred3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text=""/>
+            android:text="text"
+            android:textStyle="bold"
+            android:textSize="18dp"/>
     </com.akbor.studyproj.PredictionView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="140px"
         android:orientation="horizontal"
         android:layout_below="@id/pre_bar"
         >

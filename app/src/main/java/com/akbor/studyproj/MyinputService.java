@@ -5,6 +5,12 @@ import android.inputmethodservice.KeyboardView;
 import android.view.View;
 import android.view.inputmethod.InputConnection;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -12,31 +18,56 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
 
     private View keyboardView;
     boolean check = true;
-
-
+//    CharSequence fisrtword, secondword;
+//    private List<CharSequence> words;
+//    CharSequence str1;
+    private List<String> words;
+    private String currentInput = "";
 
     @Override
     public View onCreateInputView() {
+        setup();
         keyboardView = getLayoutInflater().inflate(R.layout.keyboard_view, null);
 
         PredictionKey firstlayer = keyboardView.findViewById(R.id.pred1);
         firstlayer.setIc(this::getCurrentInputConnection);
 
+        PredictionKey secondlayer = keyboardView.findViewById(R.id.pred2);
+        secondlayer.setIc(this::getCurrentInputConnection);
+
+        PredictionKey thirdlayer = keyboardView.findViewById(R.id.pred3);
+        thirdlayer.setIc(this::getCurrentInputConnection);
+
+        Runnable updatePredictionbar = () -> placeholder(secondlayer, thirdlayer);
+
         CustomView leftarea = keyboardView.findViewById(R.id.leftarea);
         leftarea.setInputConnection(this::getCurrentInputConnection);
         //"collect" converts the stream back to the list
         leftarea.setCharacters(Stream.of("s", "d", "e", "w", "q", "a", "", "z", "x").collect(Collectors.toList()));
+        leftarea.setCurrentTextSetter(input -> currentInput = input);
+        leftarea.setCurrentTextGetter(()-> currentInput);
         leftarea.setPredictionCallback(firstlayer::append);
+        leftarea.setUpdatebars(updatePredictionbar);
 
         CustomView centerarea = keyboardView.findViewById(R.id.centerarea);
         centerarea.setInputConnection(this::getCurrentInputConnection);
         centerarea.setCharacters(Stream.of("g", "h", "y", "t", "r", "f", "c", "v", "b").collect(Collectors.toList()));
+        centerarea.setCurrentTextSetter(input -> currentInput = input);
+        centerarea.setCurrentTextGetter(()-> currentInput);
         centerarea.setPredictionCallback(firstlayer::append);
+        centerarea.setUpdatebars(updatePredictionbar);
 
         CustomView rightarea = keyboardView.findViewById(R.id.rightarea);
         rightarea.setInputConnection(this::getCurrentInputConnection);
         rightarea.setCharacters(Stream.of("k", "l", "o", "i", "u", "j", "n", "m", "p").collect(Collectors.toList()));
+        rightarea.setCurrentTextSetter(input -> currentInput = input);
+        rightarea.setCurrentTextGetter(()-> currentInput);
         rightarea.setPredictionCallback(firstlayer::append);
+        rightarea.setUpdatebars(updatePredictionbar);
+
+
+
+
 
         leftarea.setType("lower");
         centerarea.setType("lower");
@@ -79,8 +110,8 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
                 firstlayer.setText(firstlayer.getText().subSequence(0, firstlayer.getText().length() - 1));
             }
         });
-
-
+        longdelete.setCurrentTextSetter(input -> currentInput = input);
+        longdelete.setCurrentTextGetter(()-> currentInput);
 
 
         CustomFunc space = keyboardView.findViewById(R.id.a3);
@@ -88,7 +119,8 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         space.setAction(ic -> ic.commitText(" ", 1));
         space.setPredictionBarSpaceAction(()->{
             if (firstlayer.getText().length() > 0) {
-                firstlayer.setText(firstlayer.getText().subSequence(0, firstlayer.getText().length() - firstlayer.getText().length()));
+//                firstlayer.setText(firstlayer.getText().subSequence(0, firstlayer.getText().length() - firstlayer.getText().length()));
+                firstlayer.setText("");
             }
         });
 
@@ -114,9 +146,9 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
             centerarea.setBackground(getDrawable(R.drawable.middnum));
             rightarea.setBackground(getDrawable(R.drawable.hiddenr));
 
-              leftarea.setType("spec");
-              centerarea.setType("spec");
-              rightarea.setType("spec");
+            leftarea.setType("spec");
+            centerarea.setType("spec");
+            rightarea.setType("spec");
         };
         Runnable numer =()-> {
             leftarea.setCharacters(Stream.of("•", "/", "]", "`", "[", "\\", "", "✓", "️🙂").collect(Collectors.toList()));
@@ -193,8 +225,6 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
 
         });
 
-
-
         return keyboardView;
     }
 
@@ -219,6 +249,104 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         }
     }
 
+
+    static int min(int x,int y,int z)
+    {
+        if (x <= y && x <= z) return x;
+        if (y <= x && y <= z) return y;
+        else return z;
+    }
+
+    static int editDistDP(CharSequence str1, CharSequence str2) {
+        // Create a table to store results of subproblems
+
+        int str1Length = str1.length();
+
+        int str2Length = str2.length();
+
+        int dp[][] = new int[str1Length + 1][str2Length + 1];
+
+        // Fill d[][] in bottom up manner
+        for (int i = 0; i <= str1Length; i++) {
+            for (int j = 0; j <= str2Length; j++) {
+                // If first string is empty, only option is to
+                // insert all characters of second string
+                if (i == 0)
+                    dp[i][j] = j;  // Min. operations = j
+
+                    // If second string is empty, only option is to
+                    // remove all characters of second string
+                else if (j == 0)
+                    dp[i][j] = i; // Min. operations = i
+
+                    // If last characters are same, ignore last char
+                    // and recur for remaining string
+                else if (str1.charAt(i - 1) == str2.charAt(j - 1))
+                    dp[i][j] = dp[i - 1][j - 1];
+
+                    // If the last character is different, consider all
+                    // possibilities and find the minimum
+                else
+                    dp[i][j] = 1 + min(dp[i][j - 1],  // Insert
+                            dp[i - 1][j],  // Remove
+                            dp[i - 1][j - 1]); // Replace
+            }
+        }
+        return dp[str1Length][str2Length];
+    }
+
+    List<String> bestFits;
+
+    private void placeholder(PredictionKey layer2, PredictionKey layer3) {
+
+        String str1 = currentInput.toLowerCase();
+        System.out.println(str1);
+
+        if (str1.length() < 2) {
+            bestFits = words.stream()
+                    .filter(w -> w.startsWith(str1))
+                    .limit(2)
+                    .collect(Collectors.toList());
+            //return; // TODO: fix
+        }
+
+        bestFits = words.stream()
+                .sorted((w1, w2) -> editDistDP(str1, w1) - editDistDP(str1, w2))
+                .limit(2)
+                .collect(Collectors.toList());
+
+        System.out.println(bestFits.get(0));
+
+        layer2.setText(bestFits.get(0));
+        layer3.setText(bestFits.get(1));
+
+//        for (int i = 0; i<words.size(); i++) {
+//            CharSequence str2 = words.get(i);
+//            int minDistance = str1.length();
+//            minDistance =  editDistDP(str1, str2);
+//            if (minDistance == 1) {
+//                String secondWord = words.get(i);
+//            }
+//        }
+
+    }
+
+
+    private void setup()
+    {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        InputStream dict = getResources().openRawResource(R.raw.dict);
+
+        try {
+            words = mapper.readValue(dict, List.class);
+            System.out.println(words);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
     @Override
     public void onText(CharSequence text) {
 
