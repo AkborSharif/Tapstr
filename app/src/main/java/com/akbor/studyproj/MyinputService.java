@@ -9,19 +9,25 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class MyinputService extends InputMethodService implements KeyboardView.OnKeyboardActionListener {
 
     private View keyboardView;
     boolean check = true;
-//    CharSequence fisrtword, secondword;
-//    private List<CharSequence> words;
-//    CharSequence str1;
-    private List<String> words;
+
+    private Map<Character, List<String>> dictionary = new HashMap<>();
+
     private String currentInput = "";
 
     @Override
@@ -306,34 +312,36 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
     private void placeholder(PredictionKey layer2, PredictionKey layer3) {
 
         String str1 = currentInput.toLowerCase();
-        System.out.println(str1);
 
-        if (str1.length() < 2) {
-            bestFits = words.stream()
-                    .filter(w -> w.startsWith(str1))
-                    .limit(2)
-                    .collect(Collectors.toList());
-            //return; // TODO: fix
+        if (str1.length() == 0) {
+            layer2.setText("");
+            layer3.setText("");
+            return;
         }
 
-        bestFits = words.stream()
+
+        List<String> section = dictionary.get(str1.charAt(0));
+
+        if (section == null) {
+            return;
+        }
+
+        bestFits = section.stream()
                 .sorted((w1, w2) -> editDistDP(str1, w1) - editDistDP(str1, w2))
                 .limit(2)
                 .collect(Collectors.toList());
 
-        System.out.println(bestFits.get(0));
+        if (bestFits.size() > 0) {
+            layer2.setText(bestFits.get(0));
+        } else {
+            layer2.setText("");
+        }
 
-        layer2.setText(bestFits.get(0));
-        layer3.setText(bestFits.get(1));
-
-//        for (int i = 0; i<words.size(); i++) {
-//            CharSequence str2 = words.get(i);
-//            int minDistance = str1.length();
-//            minDistance =  editDistDP(str1, str2);
-//            if (minDistance == 1) {
-//                String secondWord = words.get(i);
-//            }
-//        }
+        if (bestFits.size() > 1) {
+            layer3.setText(bestFits.get(1));
+        } else {
+            layer3.setText("");
+        }
 
     }
 
@@ -345,9 +353,22 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
 
         InputStream dict = getResources().openRawResource(R.raw.dict);
 
+        List<String> words;
+
         try {
             words = mapper.readValue(dict, List.class);
-            System.out.println(words);
+
+
+
+            for (char c = 'a'; c <= 'z'; c++) {
+                words.remove("" + c);
+                String startWith = "" + c;
+                List<String> currentList = words.stream()
+                        .filter(s -> s.startsWith(startWith))
+                        .collect(Collectors.toList());
+                dictionary.put(c, currentList);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

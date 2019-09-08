@@ -61,7 +61,6 @@ public class PredictionKey extends AppCompatTextView {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         str1 = getText();
-        System.out.print(str1);
         if (event.getAction() == MotionEvent.ACTION_DOWN){}
 
         if (event.getAction() == MotionEvent.ACTION_UP){
