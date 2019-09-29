@@ -10,7 +10,8 @@
         android:id="@+id/pre_bar"
         android:layout_width="match_parent"
         android:layout_height="72px"
-        android:background="@color/darkaqua"
+        android:background="@color/steelGrey"
+
         android:orientation="horizontal">
 
         <!--<com.akbor.studyproj.Prdictionfunc-->
@@ -43,21 +44,24 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="14dp" />
+            android:textSize="14dp"
+            android:textColor="@color/grey" />
         <com.akbor.studyproj.PredictionKey
             android:id="@+id/pred2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="14dp"/>
+            android:textSize="14dp"
+            android:textColor="@color/grey"/>
         <com.akbor.studyproj.PredictionKey
             android:id="@+id/pred3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="14dp"/>
+            android:textSize="14dp"
+            android:textColor="@color/grey"/>
     </com.akbor.studyproj.PredictionView>
 
     <LinearLayout
@@ -93,6 +97,7 @@
 
         <com.akbor.studyproj.InputMethodAction
             android:id="@+id/minipart"
+            android:background="@drawable/minipart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="19">

@@ -152,7 +152,8 @@ public class InputMethodAction extends LinearLayout {
 
     private void backspace() {
         ic.get().deleteSurroundingText(1, 0);
-        predictionBarDeleteAction.run();
+        new Handler(Looper.getMainLooper()).post(predictionBarDeleteAction);
+        //predictionBarDeleteAction.run();
         String currentInput = "";
         if (currentTextGetter != null) {
             currentInput = currentTextGetter.get();
@@ -160,7 +161,8 @@ public class InputMethodAction extends LinearLayout {
         if (currentInput.length() > 0) {
             currentTextSetter.accept(currentInput.substring(0, currentInput.length() - 1));
         }
-        backspaceAction.run();
+        new Handler(Looper.getMainLooper()).post(backspaceAction);
+        //backspaceAction.run();
 
     }
 

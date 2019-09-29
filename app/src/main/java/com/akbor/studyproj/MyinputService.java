@@ -79,21 +79,25 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         centerarea.setType("lower");
         rightarea.setType("lower");
 
+        System.out.print(currentInput);
 
         firstlayer.onCommitTextAction(() -> {
             getCurrentInputConnection().deleteSurroundingText(currentInput.length(), 0);
             secondlayer.setText("");
             thirdlayer.setText("");
+            currentInput = "";
         });
         secondlayer.onCommitTextAction(() -> {
             getCurrentInputConnection().deleteSurroundingText(currentInput.length(), 0);
             firstlayer.setText("");
             thirdlayer.setText("");
+            currentInput = "";
         });
         thirdlayer.onCommitTextAction(() -> {
             getCurrentInputConnection().deleteSurroundingText(currentInput.length(), 0);
             firstlayer.setText("");
             secondlayer.setText("");
+            currentInput = "";
         });
 //        CustomCapsLock capsLock = keyboardView.findViewById(R.id.a0);
 //       capsLock.setInputConnection(this::getCurrentInputConnection);
@@ -125,7 +129,7 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
                 firstlayer.setText(firstlayer.getText().subSequence(0, firstlayer.getText().length() - 1));
             }
         });
-        inputMethodAction.setSpaceBarAction(()->this.getCurrentInputConnection().commitText(" ", 1));
+        inputMethodAction.setSpaceBarAction(()->this.getCurrentInputConnection().commitText(" ", 0));
         inputMethodAction.setPredictionBarSpaceAction(()->{
             if (firstlayer.getText().length() > 0) {
 //                firstlayer.setText(firstlayer.getText().subSequence(0, firstlayer.getText().length() - firstlayer.getText().length()));
@@ -171,7 +175,7 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
             rightarea.setType("numeric");
         };
         Runnable specialchar = () -> {
-            leftarea.setBackground(getDrawable(R.drawable.emoj2));
+            leftarea.setBackground(getDrawable(R.drawable.charl));
             centerarea.setBackground(getDrawable(R.drawable.number));
             rightarea.setBackground(getDrawable(R.drawable.charr));
             leftarea.setCharacters(Stream.of("°", "?", "}", "~", "{", "|", "", "¢", "🙂").collect(Collectors.toList()));
@@ -221,7 +225,7 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
             }
             else {
 
-                leftarea.setBackground(getDrawable(R.drawable.emoj2));
+                leftarea.setBackground(getDrawable(R.drawable.charl));
                 centerarea.setBackground(getDrawable(R.drawable.number));
                 rightarea.setBackground(getDrawable(R.drawable.charr));
 
