@@ -80,7 +80,7 @@ public class CustomView extends LinearLayout {
     boolean upperCase = false;
 
     public Timer timer;
-
+    public Timer timer1;
     /**
      * The list of characters corresponding to this keyboard section
      */
@@ -118,7 +118,7 @@ public class CustomView extends LinearLayout {
             upperCase = isUpper;
         }
     }
-
+    int counter = 0;
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
@@ -130,36 +130,49 @@ public class CustomView extends LinearLayout {
                 timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override
+
                     public void run() {
 
-                        if (type.equals("lower")) {
-                            //setUpperCase(true);
-                            new Handler(Looper.getMainLooper()).post(uppercaseBackgroundFunc);
-                        }
-                        if (type.equals("upper")) {
-                           // setUpperCase(false);
-                            new Handler(Looper.getMainLooper()).post(lowercaseBackgroundFunc);
-                        }
-                    else if (type.equals("numeric")){
+
+                     if (type.equals("numeric")){
                             new Handler(Looper.getMainLooper()).post(specialcharbackground);
                         }
-
+               // counter++;
                     }
                 },500);
+
+            timer1 = new Timer();
+            timer1.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    if (type.equals("lower")) {
+                        //setUpperCase(true);
+                        new Handler(Looper.getMainLooper()).post(uppercaseBackgroundFunc);
+                    }
+                   else if (type.equals("upper")) {
+                        // setUpperCase(false);
+                        new Handler(Looper.getMainLooper()).post(lowercaseBackgroundFunc);
+                    }
+                }
+            }, 1500);
         }
+
+
+
 
         if (event.getAction() == MotionEvent.ACTION_UP) {
 
            timer.cancel();
-
+           timer1.cancel();
              x2 = event.getX();
              y2 = event.getY();
              dx = (x2-x);
              dy = (y2-y);
-
+             //   System.out.print(counter);
             if (type.equals("upper")) {
                 setUpperCase(true);
                 uppercaseBackgroundFunc.run();
+                counter = 0;
             }
             if (type.equals("lower")) {
                 setUpperCase(false);
