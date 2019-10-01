@@ -132,8 +132,6 @@ public class CustomView extends LinearLayout {
                     @Override
 
                     public void run() {
-
-
                      if (type.equals("numeric")){
                             new Handler(Looper.getMainLooper()).post(specialcharbackground);
                         }
