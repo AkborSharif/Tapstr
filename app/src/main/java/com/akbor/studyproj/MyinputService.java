@@ -32,9 +32,9 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
 
     @Override
     public View onCreateInputView() {
-        setup();
+       // setup();
         keyboardView = getLayoutInflater().inflate(R.layout.keyboard_view, null);
-
+/**
         PredictionKey firstlayer = keyboardView.findViewById(R.id.pred1);
         firstlayer.setIc(this::getCurrentInputConnection);
 
@@ -45,31 +45,31 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         thirdlayer.setIc(this::getCurrentInputConnection);
 
         Runnable updatePredictionbar = () -> placeholder(secondlayer, thirdlayer);
-
+ **/
         CustomView leftarea = keyboardView.findViewById(R.id.leftarea);
         leftarea.setInputConnection(this::getCurrentInputConnection);
         //"collect" converts the stream back to the list
         leftarea.setCharacters(Stream.of("s", "d", "e", "w", "q", "a", "", "z", "x").collect(Collectors.toList()));
         leftarea.setCurrentTextSetter(input -> currentInput = input);
         leftarea.setCurrentTextGetter(()-> currentInput);
-        leftarea.setPredictionCallback(firstlayer::append);
-        leftarea.setUpdatebars(updatePredictionbar);
+     //   leftarea.setPredictionCallback(firstlayer::append);
+     //   leftarea.setUpdatebars(updatePredictionbar);
 
         CustomView centerarea = keyboardView.findViewById(R.id.centerarea);
         centerarea.setInputConnection(this::getCurrentInputConnection);
         centerarea.setCharacters(Stream.of("g", "h", "y", "t", "r", "f", "c", "v", "b").collect(Collectors.toList()));
         centerarea.setCurrentTextSetter(input -> currentInput = input);
         centerarea.setCurrentTextGetter(()-> currentInput);
-        centerarea.setPredictionCallback(firstlayer::append);
-        centerarea.setUpdatebars(updatePredictionbar);
+      //  centerarea.setPredictionCallback(firstlayer::append);
+       // centerarea.setUpdatebars(updatePredictionbar);
 
         CustomView rightarea = keyboardView.findViewById(R.id.rightarea);
         rightarea.setInputConnection(this::getCurrentInputConnection);
         rightarea.setCharacters(Stream.of("k", "l", "o", "i", "u", "j", "n", "m", "p").collect(Collectors.toList()));
         rightarea.setCurrentTextSetter(input -> currentInput = input);
         rightarea.setCurrentTextGetter(()-> currentInput);
-        rightarea.setPredictionCallback(firstlayer::append);
-        rightarea.setUpdatebars(updatePredictionbar);
+       // rightarea.setPredictionCallback(firstlayer::append);
+       // rightarea.setUpdatebars(updatePredictionbar);
 
 
 
@@ -80,7 +80,7 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         rightarea.setType("lower");
 
         System.out.print(currentInput);
-
+/**
         firstlayer.onCommitTextAction(() -> {
             getCurrentInputConnection().deleteSurroundingText(currentInput.length(), 0);
             secondlayer.setText("");
@@ -99,6 +99,8 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
             secondlayer.setText("");
             currentInput = "";
         });
+        **/
+
 //        CustomCapsLock capsLock = keyboardView.findViewById(R.id.a0);
 //       capsLock.setInputConnection(this::getCurrentInputConnection);
 //        Runnable toggleCapsLock = () -> {
@@ -123,23 +125,26 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         InputMethodAction inputMethodAction = keyboardView.findViewById(R.id.minipart);
         inputMethodAction.setInputConnection(this::getCurrentInputConnection);
         inputMethodAction.setEnterKeyAction(()-> this.getCurrentInputConnection().commitText("\n", 0));
-
+/**
         inputMethodAction.setPredictionBarDeleteAction(() -> {
             if (firstlayer.getText().length() > 0) {
                 firstlayer.setText(firstlayer.getText().subSequence(0, firstlayer.getText().length() - 1));
             }
         });
-        inputMethodAction.setSpaceBarAction(()->this.getCurrentInputConnection().commitText(" ", 0));
+        **/
+        inputMethodAction.setSpaceBarAction(()->this.getCurrentInputConnection().commitText(" ", 1));
+
+        /**
         inputMethodAction.setPredictionBarSpaceAction(()->{
             if (firstlayer.getText().length() > 0) {
 //                firstlayer.setText(firstlayer.getText().subSequence(0, firstlayer.getText().length() - firstlayer.getText().length()));
                 firstlayer.setText("");
             }
         });
-
+**/
         inputMethodAction.setCurrentTextSetter(input -> currentInput = input);
         inputMethodAction.setCurrentTextGetter(()-> currentInput);
-        inputMethodAction.onBackspaceAction(() -> placeholder(secondlayer, thirdlayer));
+       // inputMethodAction.onBackspaceAction(() -> placeholder(secondlayer, thirdlayer));
 
         Runnable backgroundupper = () -> {
             leftarea.setBackground(getDrawable(R.drawable.upl));
@@ -265,7 +270,7 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         }
     }
 
-
+/**
     static int min(int x,int y,int z)
     {
         if (x <= y && x <= z) return x;
@@ -378,6 +383,7 @@ public class MyinputService extends InputMethodService implements KeyboardView.O
         }
 
     }
+ **/
     @Override
     public void onText(CharSequence text) {
 

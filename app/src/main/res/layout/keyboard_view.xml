@@ -6,70 +6,72 @@
     android:layout_height="match_parent"
     android:background="@color/blue">
 
-    <com.akbor.studyproj.PredictionView
-        android:id="@+id/pre_bar"
-        android:layout_width="match_parent"
-        android:layout_height="72px"
-        android:background="@color/steelGrey"
+    <!--<com.akbor.studyproj.PredictionView-->
+        <!--android:id="@+id/pre_bar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="72px"-->
+        <!--android:background="@color/steelGrey"-->
 
-        android:orientation="horizontal">
+        <!--android:orientation="horizontal">-->
+        <!---->
 
-        <!--<com.akbor.studyproj.Prdictionfunc-->
-            <!--android:id="@+id/pred"-->
-            <!--android:layout_width="match_parent"-->
+        <!--&lt;!&ndash;<com.akbor.studyproj.Prdictionfunc&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/pred"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:background="@drawable/lightgrey"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:completionThreshold="1">&ndash;&gt;-->
+
+
+        <!--&lt;!&ndash;</com.akbor.studyproj.Prdictionfunc>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;<AutoCompleteTextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/textView3"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="200dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_alignTop="@+id/pre_bar"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:background="@drawable/lightgrey" />&ndash;&gt;-->
+
+        <!--&lt;!&ndash;<AutoCompleteTextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/textView4"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="200dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:background="@drawable/lightgrey" />&ndash;&gt;-->
+        <!--<com.akbor.studyproj.PredictionKey-->
+            <!--android:id="@+id/pred1"-->
+            <!--android:layout_width="0dp"-->
             <!--android:layout_height="match_parent"-->
-            <!--android:background="@drawable/lightgrey"-->
-            <!--android:completionThreshold="1">-->
-
-
-        <!--</com.akbor.studyproj.Prdictionfunc>-->
-
-        <!--<AutoCompleteTextView-->
-            <!--android:id="@+id/textView3"-->
-            <!--android:layout_width="200dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_alignTop="@+id/pre_bar"-->
             <!--android:layout_weight="1"-->
-            <!--android:background="@drawable/lightgrey" />-->
-
-        <!--<AutoCompleteTextView-->
-            <!--android:id="@+id/textView4"-->
-            <!--android:layout_width="200dp"-->
+            <!--android:gravity="center"-->
+            <!--android:textSize="14dp"-->
+            <!--android:textColor="@color/grey" />-->
+        <!--<com.akbor.studyproj.PredictionKey-->
+            <!--android:id="@+id/pred2"-->
+            <!--android:layout_width="0dp"-->
             <!--android:layout_height="match_parent"-->
             <!--android:layout_weight="1"-->
-            <!--android:background="@drawable/lightgrey" />-->
-        <com.akbor.studyproj.PredictionKey
-            android:id="@+id/pred1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="14dp"
-            android:textColor="@color/grey" />
-        <com.akbor.studyproj.PredictionKey
-            android:id="@+id/pred2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="14dp"
-            android:textColor="@color/grey"/>
-        <com.akbor.studyproj.PredictionKey
-            android:id="@+id/pred3"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="14dp"
-            android:textColor="@color/grey"/>
-    </com.akbor.studyproj.PredictionView>
+            <!--android:gravity="center"-->
+            <!--android:textSize="14dp"-->
+            <!--android:textColor="@color/grey"/>-->
+        <!--<com.akbor.studyproj.PredictionKey-->
+            <!--android:id="@+id/pred3"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:textSize="14dp"-->
+            <!--android:textColor="@color/grey"/>-->
+    <!--</com.akbor.studyproj.PredictionView>-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="140px"
         android:orientation="horizontal"
-        android:layout_below="@id/pre_bar"
         >
+        <!--android:layout_below="@id/pre_bar"-->
+
 
         <com.akbor.studyproj.CustomView
             android:id="@+id/leftarea"

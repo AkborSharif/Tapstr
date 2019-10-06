@@ -273,7 +273,7 @@ public class CustomView extends LinearLayout {
 //                System.out.print(fisrtword);
 //                System.out.print(secondword);
 
-            updatebars.run();
+//            updatebars.run();
 
 
     }

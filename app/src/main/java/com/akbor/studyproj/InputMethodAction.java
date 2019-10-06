@@ -102,9 +102,9 @@ public class InputMethodAction extends LinearLayout {
                         public void run() {
                             backspace();
                         }
-                    }, 200, 50);
+                    }, 300, 50);
                 }
-            }, 500);
+            }, 600);
         }
 
         if (event.getAction() == MotionEvent.ACTION_UP) {
