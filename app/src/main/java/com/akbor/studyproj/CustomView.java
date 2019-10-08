@@ -144,15 +144,15 @@ public class CustomView extends LinearLayout {
                 @Override
                 public void run() {
                     if (type.equals("lower")) {
-                        //setUpperCase(true);
+                        setUpperCase(true);
                         new Handler(Looper.getMainLooper()).post(uppercaseBackgroundFunc);
                     }
                    else if (type.equals("upper")) {
-                        // setUpperCase(false);
+                        setUpperCase(false);
                         new Handler(Looper.getMainLooper()).post(lowercaseBackgroundFunc);
                     }
                 }
-            }, 1500);
+            }, 500);
         }
 
 
@@ -166,16 +166,17 @@ public class CustomView extends LinearLayout {
              y2 = event.getY();
              dx = (x2-x);
              dy = (y2-y);
-             //   System.out.print(counter);
+              //  System.out.print(counter);
             if (type.equals("upper")) {
-                setUpperCase(true);
-                uppercaseBackgroundFunc.run();
-                counter = 0;
-            }
-            if (type.equals("lower")) {
-                setUpperCase(false);
+               // setUpperCase(false);
+               // uppercaseBackgroundFunc.run();
                 lowercaseBackgroundFunc.run();
             }
+           // if (type.equals("lower")) {
+               // setUpperCase(false);
+               // lowercaseBackgroundFunc.run();
+              //  uppercaseBackgroundFunc.run();
+           // }
             if (type.equals("spec")) { spceialchar.run(); }
             else if (type.equals("numeric")){ numr.run(); }
 
@@ -252,7 +253,7 @@ public class CustomView extends LinearLayout {
 //            }
 
 
-//            setUpperCase(false);
+            setUpperCase(false);
         }
         return true;
     }
