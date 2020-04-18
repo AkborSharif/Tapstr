@@ -23,7 +23,47 @@ Android Studio plateform with Java
 ## Demonstration
 
 
+## Code
+```Java
+//Setting the characters to left area while stroking
 
+    CustomView leftarea = keyboardView.findViewById(R.id.leftarea);
+    leftarea.setInputConnection(this::getCurrentInputConnection);
+    //"collect" converts the stream back to the list
+    leftarea.setCharacters(Stream.of("s", "d", "e", "w", "q", "a", "", "z", "x").collect(Collectors.toList()));
+    leftarea.setCurrentTextSetter(input -> currentInput = input);
+    leftarea.setCurrentTextGetter(()-> currentInput);
+```
+
+```Java
+//Capslock Function
+    public void setUpperCase(boolean isUpper) {
+        if (upperCase != isUpper) {
+            if (isUpper) {
+                characters = characters.stream()
+                        .map(String::toUpperCase)
+                        .collect(Collectors.toList());
+            } else {
+                characters = characters.stream()
+                        .map(String::toLowerCase)
+                        .collect(Collectors.toList());
+            }
+            upperCase = isUpper;
+        }
+    }
+```
+
+```Java
+//Setting special characters
+        Runnable numer =()-> {
+            leftarea.setCharacters(Stream.of("•", "/", "]", "`", "[", "\\", "", "✓", "️🙂").collect(Collectors.toList()));
+            centerarea.setCharacters(Stream.of("5", "6", "3", "2", "1", "4", "7", "8", "9").collect(Collectors.toList()));
+            rightarea.setCharacters(Stream.of(".", ";", "√", "=", "-", ",", "0", "×", "’").collect(Collectors.toList()));
+            leftarea.setType("numeric");
+            centerarea.setType("numeric");
+            rightarea.setType("numeric");
+        };
+```
 
 ## Features
 
