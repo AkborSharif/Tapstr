@@ -23,9 +23,9 @@ Android Studio plateform with Java
 ## Demonstration
 ![](layout.jpg)
 ![](actions.png)   
-![](device.png)
+<a href = "device.png" height = "200"></a>
 ![](thumb.png)
-![](device.png)
+![](tapstr.png)
 
 ## Code
 ```Java
