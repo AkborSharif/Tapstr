@@ -5,7 +5,7 @@ Tap And Swipe-based Keyboard For Mobile Text Entry
 ## Motivation
 
 It was a research project under the supervision of **[Assistance professor Ahmed Sabbir Arif](https://www.asarif.com/index.html)** Phd **UCMERCED**. 
-Beside others thing, I was motivated to develop Tapstr to appriciate amount of knowledge and work scientiest put in to build such kind of software with a lot of awesome features. We use keyboards everyday not realizing or appriciating how they are developed. AS this was my effort to explore, learn, understand, and build a keyboard based application.
+Beside others thing, I was motivated to develop Tapstr to appriciate amount of knowledge and work scientiest put into building such kind of software with a lot of awesome features. We use keyboards everyday not realizing or appriciating how they are developed. So this was my effort to explore, learn, understand, and build a keyboard based application.
 
 ## Description
 
