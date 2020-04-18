@@ -21,8 +21,8 @@ Android Studio plateform with Java
 <a href="https://www.clipart.email/download/11386057.html" title="Image from clipart.email"><img src="https://cdn.clipart.email/80b77b23b7b5532d36d68266016a7fd5_the-java-feature-you-never-knew-about-the-java-report-medium_500-334.png" width="180" height = "120" alt="Java 8 Logo Png" /></a>
 
 ## Demonstration
-![](layout.jpg) <br>
-![](actions.png)<br> 
+![](layout.jpg) <br> <br>
+![](actions.png)<br> <br>
 ![](thumb.png)<br> <br>
 ![](tapstr.png)<br>
 
