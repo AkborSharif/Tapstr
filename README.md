@@ -42,7 +42,18 @@ Android Studio plateform with Java
 7) Prediction bar at the top of the keyboard. 
 
 
-Collaborator in User Studies
+## SOME BENEFITS OF THIS KEYBOARD 
+
+* You can use it to type something in smart watches. Since smart watches have small screen this keyboard is useful because this IME is all about the gesture. For example, flicking up on the screen will give you the character “w” or “t” or “I” depend on which area of the IME users touch.  
+
+* You can use it while watching a YouTube video on any android device  
+
+* It can be used in the Thermostats (Example: Nest Thermostat). Since it a tap and flick keyboard it’s easier to type. You can use it to search for a Wi-Fi, or to insert your email in the thermostats and etc. 
+
+* You can use it for game controller to use joy stick 
+
+
+## Collaborator in User Studies
 Gulnar Rakhmetull <br>
 PhD in Electrical Engineering & Computer Science
 01/2018-Current  <br>
