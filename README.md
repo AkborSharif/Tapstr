@@ -22,8 +22,8 @@ Android Studio plateform with Java
 
 ## Demonstration
 ![](layout.jpg) <br>
-![](actions.png)<br>
-![](thumb.png)<br>
+![](actions.png)<br> 
+![](thumb.png)<br> <br>
 ![](tapstr.png)<br>
 
 ## Code
