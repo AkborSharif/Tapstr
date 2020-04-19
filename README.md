@@ -26,7 +26,7 @@ Android Studio plateform with Java
 ![](thumb.png)<br> <br>
 ![](tapstr.png)<br>
 
-## Code
+## Code Examples
 ```Java
 //Setting the characters to left area while stroking
 
