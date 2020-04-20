@@ -25,15 +25,16 @@ Android Studio plateform with Java
 # IMAGE
 ![](layout.jpg) <br> <br>
 ![](actions.png)<br> <br>
-![](thumb.png)<br> <br>
+<!-- ![](thumb.png)<br> <br> -->
+<a><img src="thumb.png" width="200" height="350"></a>
 ![](tapstr.png)<br>
 
 # VISUAL
 
 
- <a><img src="keyboard.gif" width="200" height="350" style="padding: 20px;"></a>
- <a><img src="keyb.gif" width="200" height="350" style="padding: 20px;"></a>
- <a><img src="delete.gif" width="200" height="350" style="padding: 20px;"></a>
+ <a><img src="keyboard.gif" width="200" height="350"></a>  <br>
+ <a><img src="keyb.gif" width="200" height="350"></a> <br>
+ <a><img src="delete.gif" width="200" height="350"></a> <br>
 
 
 ## Code Examples
