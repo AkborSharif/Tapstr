@@ -22,14 +22,14 @@ Android Studio plateform with Java
 
 ## Demonstration
 
-# IMAGE
+### IMAGE
 ![](layout.jpg) <br> <br>
 ![](actions.png)<br> <br>
 <!-- ![](thumb.png)<br> <br> -->
 <a><img src="thumb.png"  height="350"></a>
 ![](tapstr.png)<br>
 
-# VISUAL
+### VISUAL
 
 
  <a><img src="keyboard.gif" height="450" ></a>  <a><img src="delete.gif"  height="450"> </a> 
