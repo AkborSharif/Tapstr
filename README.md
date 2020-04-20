@@ -29,7 +29,7 @@ Android Studio plateform with Java
 ![](tapstr.png)<br>
 
 # VISUAL
-![](Tapstr/2020-04-19 16.49.57.gif) 
+ 
 
 
 ## Code Examples
