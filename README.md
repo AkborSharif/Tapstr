@@ -26,7 +26,7 @@ Android Studio plateform with Java
 ![](layout.jpg) <br> <br>
 ![](actions.png)<br> <br>
 <!-- ![](thumb.png)<br> <br> -->
-<a><img src="thumb.png" width="200" height="350"></a>
+<a><img src="thumb.png"  height="350"></a>
 ![](tapstr.png)<br>
 
 # VISUAL
