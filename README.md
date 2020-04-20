@@ -33,8 +33,10 @@ Android Studio plateform with Java
 
 
  <a><img src="keyboard.gif" height="450" ></a>  
- <a><img src="delete.gif"  height="450"></a> <br>
- <a><img src="keyb.gif" height="500"></a> <br>
+ <a><img src="delete.gif"  height="450"> </a> 
+ 
+ <br>
+ <a><img src="keyb.gif" height="500"></a> 
  
 
 
