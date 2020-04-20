@@ -29,6 +29,10 @@ Android Studio plateform with Java
 ![](tapstr.png)<br>
 
 # VISUAL
+
+
+ <a><img src="keyb.gif" /></a>
+ <a><img src="keyb.gif" /></a>
  <a><img src="keyb.gif" /></a>
 
 
