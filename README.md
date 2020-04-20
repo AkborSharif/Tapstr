@@ -1,6 +1,4 @@
 # Tapstr #
----
----
 
 
 Tap And Swipe-based Keyboard For Mobile Text Entry 
