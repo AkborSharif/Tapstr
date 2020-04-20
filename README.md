@@ -32,9 +32,9 @@ Android Studio plateform with Java
 # VISUAL
 
 
- <a><img src="keyboard.gif" width="400" height="450" ></a>  <br>
- <a><img src="keyb.gif" width="400"></a> <br>
- <a><img src="delete.gif" width="400" height="450"></a> <br>
+ <a><img src="keyboard.gif" height="450" ></a>  <br>
+ <a><img src="keyb.gif" height="500"></a> <br>
+ <a><img src="delete.gif"  height="450"></a> <br>
 
 
 ## Code Examples
