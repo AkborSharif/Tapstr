@@ -31,7 +31,7 @@ Android Studio plateform with Java
 # VISUAL
 
 
- <a><img src="keyboard.gif" /></a>
+ <a><img src="keyboard.gif" width="180" height = "120"/></a>
  <a><img src="keyb.gif" /></a>
  <a><img src="delete.gif" /></a>
 
