@@ -30,8 +30,7 @@ Android Studio plateform with Java
 
 # VISUAL
 ![](2020-04-19 16.49.57.gif) <br> <br>
-![](2020-04-19 16.58.42.gif)<br> <br>
-![](2020-04-19 16.53.25.gif)<br> <br>
+
 
 ## Code Examples
 ```Java
