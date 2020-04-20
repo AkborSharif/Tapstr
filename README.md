@@ -29,7 +29,7 @@ Android Studio plateform with Java
 ![](tapstr.png)<br>
 
 # VISUAL
- ![] keyb.gif
+ <a><img src="keyb.gif" /></a>
 
 
 ## Code Examples
